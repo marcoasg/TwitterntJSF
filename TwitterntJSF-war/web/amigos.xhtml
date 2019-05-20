@@ -10,7 +10,7 @@
         <h1>Mis amigos</h1>
         <h:dataTable value="#{amigosList.amigos}" var="amigo">
             <h:column>
-                #{amigo}
+                #{amigo.nombre + " " + amigo.apellidos}
             </h:column>
             <h:column>
                 <h:commandButton action="#{amigosList.eliminar}" 

@@ -12,7 +12,7 @@ import twitternt.entity.Post;
 
 /**
  *
- * @author Trigi
+ * @author Jesús Muley
  */
 @Stateless
 public class PostFacade extends AbstractFacade<Post> {

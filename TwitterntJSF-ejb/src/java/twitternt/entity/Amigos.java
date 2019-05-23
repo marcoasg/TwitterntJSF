@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Trigi
+ * @author Jesús Muley
  */
 @Entity
 @Table(name = "amigos")
@@ -35,10 +35,10 @@ public class Amigos implements Serializable {
     protected AmigosPK amigosPK;
     @Column(name = "solicitudAceptada")
     private Boolean solicitudAceptada;
-    @JoinColumn(name = "amigo2", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "amigo1", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Usuario usuario;
-    @JoinColumn(name = "amigo1", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "amigo2", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Usuario usuario1;
 

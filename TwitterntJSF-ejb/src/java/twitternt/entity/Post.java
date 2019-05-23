@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Trigi
+ * @author Jesús Muley
  */
 @Entity
 @Table(name = "post")

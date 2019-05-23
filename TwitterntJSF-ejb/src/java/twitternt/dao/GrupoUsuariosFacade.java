@@ -12,7 +12,7 @@ import twitternt.entity.GrupoUsuarios;
 
 /**
  *
- * @author Trigi
+ * @author Jesús Muley
  */
 @Stateless
 public class GrupoUsuariosFacade extends AbstractFacade<GrupoUsuarios> {

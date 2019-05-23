@@ -8,16 +8,18 @@
     </h:head>
     <h:body>
         <h1>Mis amigos</h1>
-        <h:dataTable value="#{amigosList.amigos}" var="amigo">
+        <h:dataTable value="#{amigosBean.listaAmigos}" var="amigo">
             <h:column>
-                #{amigo.nombre + " " + amigo.apellidos}
+                #{amigo.nombre}
             </h:column>
             <h:column>
-                <h:commandButton action="#{amigosList.eliminar}" 
-                                 value="Eliminar"
-                                 <f:setPropertyActionListener value="#{amigo}"
-                                                              target="#{amigosList.seleccionado}" />
-                </h:commandButton>
+                <h:form>
+                    <h:commandButton action="#{amigosBean.doEliminar()}" 
+                                     value="Eliminar">
+                                     <f:setPropertyActionListener value="#{amigo}"
+                                                                  target="#{amigosBean.seleccionado}" />
+                    </h:commandButton>
+                </h:form>
             </h:column>
         </h:dataTable>
     </h:body>

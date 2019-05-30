@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import twitternt.dao.AmigosFacade;
 import twitternt.entity.Usuario;
@@ -20,7 +20,7 @@ import twitternt.entity.Usuario;
  * @author Trigi
  */
 @Named(value = "amigosBean")
-@SessionScoped
+@RequestScoped
 public class AmigosBean implements Serializable {
 
     @EJB

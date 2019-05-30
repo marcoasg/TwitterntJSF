@@ -12,11 +12,10 @@ import twitternt.entity.GrupoUsuarios;
 
 /**
  *
- * @author Jesús Muley
+ * @author adry1
  */
 @Stateless
 public class GrupoUsuariosFacade extends AbstractFacade<GrupoUsuarios> {
-
     @PersistenceContext(unitName = "TwitterntJSF-ejbPU")
     private EntityManager em;
 

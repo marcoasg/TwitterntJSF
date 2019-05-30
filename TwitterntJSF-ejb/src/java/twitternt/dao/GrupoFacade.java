@@ -5,6 +5,7 @@
  */
 package twitternt.dao;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -12,11 +13,10 @@ import twitternt.entity.Grupo;
 
 /**
  *
- * @author Jesús Muley
+ * @author adry1
  */
 @Stateless
 public class GrupoFacade extends AbstractFacade<Grupo> {
-
     @PersistenceContext(unitName = "TwitterntJSF-ejbPU")
     private EntityManager em;
 
@@ -27,6 +27,14 @@ public class GrupoFacade extends AbstractFacade<Grupo> {
 
     public GrupoFacade() {
         super(Grupo.class);
+    }
+    
+        public Grupo findById(int id){
+        return (Grupo) this.em.createNamedQuery("Grupo.findById").setParameter("id", id).getSingleResult();
+    }
+
+    public List<Grupo> findLikeName(String n) {
+        return (List<Grupo>) this.em.createQuery("SELECT g FROM Grupo g WHERE g.nombre LIKE '%"+n+"%' OR g.nombre LIKE '%"+n+"%'").getResultList();
     }
     
 }

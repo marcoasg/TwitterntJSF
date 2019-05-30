@@ -18,18 +18,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Jesús Muley
+ * @author adry1
  */
 @Entity
 @Table(name = "grupo_usuarios")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "GrupoUsuarios.findAll", query = "SELECT g FROM GrupoUsuarios g")
-    , @NamedQuery(name = "GrupoUsuarios.findByGrupo", query = "SELECT g FROM GrupoUsuarios g WHERE g.grupoUsuariosPK.grupo = :grupo")
-    , @NamedQuery(name = "GrupoUsuarios.findByUsuario", query = "SELECT g FROM GrupoUsuarios g WHERE g.grupoUsuariosPK.usuario = :usuario")
-    , @NamedQuery(name = "GrupoUsuarios.findBySolicitudAceptada", query = "SELECT g FROM GrupoUsuarios g WHERE g.solicitudAceptada = :solicitudAceptada")})
+    @NamedQuery(name = "GrupoUsuarios.findAll", query = "SELECT g FROM GrupoUsuarios g"),
+    @NamedQuery(name = "GrupoUsuarios.findByGrupo", query = "SELECT g FROM GrupoUsuarios g WHERE g.grupoUsuariosPK.grupo = :grupo"),
+    @NamedQuery(name = "GrupoUsuarios.findByUsuario", query = "SELECT g FROM GrupoUsuarios g WHERE g.grupoUsuariosPK.usuario = :usuario"),
+    @NamedQuery(name = "GrupoUsuarios.findBySolicitudAceptada", query = "SELECT g FROM GrupoUsuarios g WHERE g.solicitudAceptada = :solicitudAceptada")})
 public class GrupoUsuarios implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected GrupoUsuariosPK grupoUsuariosPK;

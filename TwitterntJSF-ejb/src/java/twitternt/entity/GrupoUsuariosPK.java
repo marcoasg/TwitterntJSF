@@ -13,11 +13,10 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author Jesús Muley
+ * @author adry1
  */
 @Embeddable
 public class GrupoUsuariosPK implements Serializable {
-
     @Basic(optional = false)
     @NotNull
     @Column(name = "grupo")

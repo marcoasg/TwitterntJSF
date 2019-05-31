@@ -47,7 +47,7 @@ public class AmigosBean implements Serializable {
     public String doEliminar(){
         this.amigosFacade.remove(amigosFacade.findFriendByPair(seleccionado.getId(), loginBean.getUserId()));
         init();
-        return "amigos";
+        return null;
     }
     
     public List<Usuario> getListaAmigos(){

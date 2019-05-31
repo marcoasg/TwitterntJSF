@@ -8,6 +8,12 @@ package twitternt.bean;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.inject.Inject;
+import twitternt.dao.UsuarioFacade;
+import twitternt.entity.Usuario;
 
 /**
  *
@@ -17,6 +23,14 @@ import java.io.Serializable;
 @SessionScoped
 public class LoginBean implements Serializable {
 
+    @EJB
+    private UsuarioFacade usuarioFacade;
+    
+    @Inject
+    protected UsuarioBean usuarioBean;
+    
+    protected Usuario usuario;
+    protected List<Usuario> listaUsuarios;
     Integer userId;
     /**
      * Creates a new instance of LoginBean
@@ -28,4 +42,13 @@ public class LoginBean implements Serializable {
         return 1;
     }
     
+    @PostConstruct
+    public void init(){
+       this.listaUsuarios = this.usuarioFacade.findAll();
+    }
+    
+    public void doComprobacion(String user, String pass){
+      
+    }
 }
+

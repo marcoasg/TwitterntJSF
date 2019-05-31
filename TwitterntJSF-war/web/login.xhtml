@@ -31,8 +31,8 @@
                                             <h:inputText id="password" class="form-control" t:placeholder="Password" />
                                         </div>
                                         <div class="text-right">
-                                            <h:commandButton value="   Entrar   " class="btn btn-success"></h:commandButton> &nbsp;
-                                            <h:commandButton value="Registrarse" class="btn btn-success"></h:commandButton>
+                                            <h:commandButton value="   Entrar   "  action = "#{usuarioBean.doLogin(user, password)}"class="btn btn-success"></h:commandButton> &nbsp;
+                                            <h:commandButton value="Registrarse" action="#{usuarioBean.doRegistro()}" class="btn btn-success"></h:commandButton>
                                         </div>
 				</h:form>
                             </div>

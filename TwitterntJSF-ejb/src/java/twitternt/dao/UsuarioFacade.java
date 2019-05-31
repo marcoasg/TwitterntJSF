@@ -47,4 +47,8 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         return (List<Usuario>) this.em.createQuery("SELECT u FROM Usuario u WHERE u.nombreUsuario LIKE '%"+n+"%' OR u.nombre LIKE '%"+n+"%'").getResultList();
     }
     
+    @Override
+    public List<Usuario> findAll(){
+       return super.findAll();
+    }
 }

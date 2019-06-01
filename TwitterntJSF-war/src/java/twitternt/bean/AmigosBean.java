@@ -49,6 +49,7 @@ public class AmigosBean implements Serializable {
     
     public String doEliminar(){
         amigosFacade.remove(amigosFacade.findFriendByPair(seleccionado.getId(), loginBean.getUserId()));
+        init();
         return null;
     }
     

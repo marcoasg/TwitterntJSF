@@ -31,6 +31,8 @@ public class LoginBean implements Serializable {
     
     protected Usuario usuario;
     protected List<Usuario> listaUsuarios;
+    protected String user;
+    protected String pass;
     Integer userId;
     /**
      * Creates a new instance of LoginBean
@@ -40,11 +42,52 @@ public class LoginBean implements Serializable {
     
     @PostConstruct
     public void init(){
-       this.listaUsuarios = this.usuarioFacade.findAll();
+       this.usuario = this.usuarioFacade.findByUserName(this.user);
+       if(this.usuario != null){
+        this.userId = this.usuario.getId();
+       }
     }
     
-    public void doComprobacion(String user, String pass){
+    public String doLogin(){
+        System.out.println(user + "," + pass);
+      this.init();
+      if(this.usuario != null && this.usuario.getPassword().equals(pass)){
+        return "index";
+      }
+      return "login";
       
+    }
+
+    public UsuarioFacade getUsuarioFacade() {
+        return usuarioFacade;
+    }
+
+    public void setUsuarioFacade(UsuarioFacade usuarioFacade) {
+        this.usuarioFacade = usuarioFacade;
+    }
+
+    public UsuarioBean getUsuarioBean() {
+        return usuarioBean;
+    }
+
+    public void setUsuarioBean(UsuarioBean usuarioBean) {
+        this.usuarioBean = usuarioBean;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
     }
     
     public String logout() {
@@ -69,7 +112,7 @@ public class LoginBean implements Serializable {
     }
 
     public Integer getUserId() {
-        return 1;
+        return this.userId;
     }
 
     public void setUserId(Integer userId) {

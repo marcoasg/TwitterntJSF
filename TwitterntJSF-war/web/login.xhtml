@@ -23,15 +23,15 @@
                                         <div class="input-group-prepend">
 									<span class="input-group-text" id="basic-addon1"><i class="fas fa-user-edit"></i></span>
 								</div>
-                                            <h:inputText id="user" class="form-control" t:placeholder="Username"/>
+                                        <h:inputText id="user" value="#{loginBean.user}" class="form-control" t:placeholder="Username"/>
                                     </div>
                                         <div class="input-group mb-3">
                                            <div class="input-group-prepend">
                                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-lock"></i></span></div>
-                                            <h:inputText id="password" class="form-control" t:placeholder="Password" />
+                                               <h:inputSecret id="password" value="#{loginBean.pass}" class="form-control" t:placeholder="Password" />
                                         </div>
                                         <div class="text-right">
-                                            <h:commandButton value="   Entrar   "  action = "#{usuarioBean.doLogin(user, password)}"class="btn btn-success"></h:commandButton> &nbsp;
+                                            <h:commandButton value="   Entrar   " action="#{loginBean.doLogin()}" class="btn btn-success"></h:commandButton> &nbsp;
                                             <h:commandButton value="Registrarse" action="#{usuarioBean.doRegistro()}" class="btn btn-success"></h:commandButton>
                                         </div>
 				</h:form>

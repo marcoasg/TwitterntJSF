@@ -22,7 +22,7 @@
                                         <div class="input-group-prepend">
 									<span class="input-group-text" id="basic-addon1"><i class="fas fa-user-edit"></i></span>
 								</div>
-                                        <h:inputText id="user" value="#{registroBean.user}" class="form-control" t:placeholder="Username"/>
+                                        <h:inputText id="user" value="#{registroBean.user}" class="form-control" t:placeholder="Nombre de usuario"/>
                                     </div>
                                     <div class="input-group mb-3">
                                        <div class="input-group-prepend">
@@ -32,16 +32,21 @@
                                     <div class="input-group mb-3">
                                        <div class="input-group-prepend">
                                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-lock"></i></span></div>
+                                           <h:inputSecret id="password2" value="#{registroBean.pass2}" class="form-control" t:placeholder="Repetir password" />
+                                    </div>
+                                    <div class="input-group mb-3">
+                                       <div class="input-group-prepend">
+                                           <span class="input-group-text" id="basic-addon1"><i class="fas fa-clipboard-list"></i></span></div>
                                            <h:inputText id="nombre" value="#{registroBean.nombre}" class="form-control" t:placeholder="Nombre" />
                                     </div>
                                     <div class="input-group mb-3">
                                        <div class="input-group-prepend">
-                                           <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-lock"></i></span></div>
+                                           <span class="input-group-text" id="basic-addon1"><i class="fas fa-clipboard-list"></i></span></div>
                                            <h:inputText id="apellidos" value="#{registroBean.apellidos}" class="form-control" t:placeholder="Apellidos" />
                                     </div>
                                     <div class="input-group mb-3">
                                        <div class="input-group-prepend">
-                                           <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-lock"></i></span></div>
+                                           <span class="input-group-text" id="basic-addon1"><i class="fas fa-at"></i></span></div>
                                            <h:inputText id="email" value="#{registroBean.email}" class="form-control" t:placeholder="Email" />
                                     </div>
                                         <div class="text-right">

@@ -26,6 +26,7 @@ public class RegistroBean {
     protected Usuario usuario;
     protected String user;
     protected String pass;
+    protected String pass2;
     protected String nombre;
     protected String apellidos;
     protected String email;
@@ -95,10 +96,18 @@ public class RegistroBean {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getPass2() {
+        return pass2;
+    }
+
+    public void setPass2(String pass2) {
+        this.pass2 = pass2;
+    }
     
     public String doRegistro(){
         this.init();
-        if(this.usuario == null){
+        if(this.usuario == null && this.pass.equals(this.pass2)){
             this.usuario = new Usuario();
             this.usuario.setNombreUsuario(this.user);
             this.usuario.setPassword(this.pass);

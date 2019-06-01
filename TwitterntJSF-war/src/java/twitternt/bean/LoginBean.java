@@ -47,6 +47,7 @@ public class LoginBean implements Serializable {
        }
     }
     
+    
     public String doLogin(){
         System.out.println(user + "," + pass);
       this.init();

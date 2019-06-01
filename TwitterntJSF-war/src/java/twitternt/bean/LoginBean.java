@@ -11,7 +11,10 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 import twitternt.dao.UsuarioFacade;
 import twitternt.entity.Usuario;
 
@@ -59,10 +62,11 @@ public class LoginBean implements Serializable {
 
     
     public String logout() {
-        this.usuario = null;
-        this.user = null;
-        this.pass = null;
-        this.userId = null;
+        FacesContext context = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = context.getExternalContext();
+        Object session = externalContext.getSession(false);
+        HttpSession httpSession = (HttpSession) session;
+        httpSession.invalidate();
         return "login";
     }
     

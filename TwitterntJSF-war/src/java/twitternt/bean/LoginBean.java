@@ -46,6 +46,11 @@ public class LoginBean implements Serializable {
     public void doComprobacion(String user, String pass){
       
     }
+    
+    public String logout() {
+        //hacer logout...
+        return "login";
+    }
 
     public Usuario getUsuario() {
         return usuario;

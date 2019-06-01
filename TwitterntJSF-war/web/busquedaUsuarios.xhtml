@@ -6,6 +6,7 @@
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:form>
+        Busque un usuario:<br/>
         <h:inputText value="#{busquedaUsuariosBean.pattern}" class="form-control">
             <f:ajax event="keyup" listener="#{busquedaUsuariosBean.doBusqueda()}"
                     render="resultadoBusqueda"/>

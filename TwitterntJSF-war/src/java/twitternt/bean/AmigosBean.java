@@ -10,9 +10,10 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import twitternt.dao.AmigosFacade;
+import twitternt.entity.Amigos;
 import twitternt.entity.Usuario;
 
 /**
@@ -20,7 +21,7 @@ import twitternt.entity.Usuario;
  * @author Trigi
  */
 @Named(value = "amigosBean")
-@SessionScoped
+@RequestScoped
 public class AmigosBean implements Serializable {
 
     @EJB
@@ -30,6 +31,7 @@ public class AmigosBean implements Serializable {
     protected LoginBean loginBean;
     
     private List<Usuario> listaAmigos;
+    private List<Usuario> listaSolicitudes;
     
     private Usuario seleccionado;
 
@@ -42,10 +44,26 @@ public class AmigosBean implements Serializable {
     @PostConstruct
     public void init(){
         listaAmigos = amigosFacade.findByUser(loginBean.getUserId());
+        listaSolicitudes = amigosFacade.findPetitionsByUser(loginBean.getUserId());
     }
     
     public String doEliminar(){
-        this.amigosFacade.remove(amigosFacade.findFriendByPair(seleccionado.getId(), loginBean.getUserId()));
+        amigosFacade.remove(amigosFacade.findFriendByPair(seleccionado.getId(), loginBean.getUserId()));
+        return null;
+    }
+    
+    public String doAceptarSolicitud() {
+        Amigos solicitud = amigosFacade.findPetitionByPair(seleccionado.getId(), loginBean.getUserId());
+        solicitud.setSolicitudAceptada(true);
+        amigosFacade.edit(solicitud);
+        init();
+        return null;
+    }
+    
+    public String doRechazarSolicitud() {
+        Amigos solicitud = amigosFacade.findPetitionByPair(seleccionado.getId(), loginBean.getUserId());
+        amigosFacade.remove(solicitud);
+        init();
         return null;
     }
     
@@ -64,6 +82,12 @@ public class AmigosBean implements Serializable {
     public void setSeleccionado(Usuario seleccionado) {
         this.seleccionado = seleccionado;
     }
-    
-    
+
+    public List<Usuario> getListaSolicitudes() {
+        return listaSolicitudes;
+    }
+
+    public void setListaSolicitudes(List<Usuario> listaSolicitudes) {
+        this.listaSolicitudes = listaSolicitudes;
+    }
 }

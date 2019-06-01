@@ -29,7 +29,7 @@
                         </li>
                         <li class="nav-item">
                             <h:commandLink action="#{loginBean.logout()}" class="nav-link" style="color: white">
-                            Cerrar sesión
+                                Cerrar sesión
                             </h:commandLink>
                         </li>
                     </ul>
@@ -52,7 +52,9 @@
                                 </h:commandLink>
                             </h:form>
                         </h:column>
+
                         <h:column></h:column>
+
                         <h:column>
                             <h:form>
                                 <h:commandButton action="#{amigosBean.doEliminar()}" 
@@ -68,6 +70,46 @@
                 </div>
                 <div class="col-5">
                     <h1>Solicitudes de amistad</h1>
+                    <br/>
+                    <h:dataTable value="#{amigosBean.listaSolicitudes}" var="solicitud">
+                        <h:column>
+                            <h:form>
+                                <h:commandLink action="#{perfilBean.cargaPerfil()}" class="btn btn-link">
+                                    #{solicitud.nombre}&nbsp;#{solicitud.apellidos}
+                                    <f:setPropertyActionListener value="#{solicitud}"
+                                                                 target="#{perfilBean.usuario}" />
+                                </h:commandLink>
+                            </h:form>
+                        </h:column>
+
+                        <h:column></h:column>
+
+                        <h:column>
+                            <h:form>
+                                <h:commandButton action="#{amigosBean.doAceptarSolicitud()}" 
+                                                 value="Aceptar"
+                                                 class="btn btn-success"
+                                                 style="margin-left: 15px">
+                                    <f:setPropertyActionListener value="#{solicitud}"
+                                                                 target="#{amigosBean.seleccionado}" />
+                                </h:commandButton>
+                            </h:form>
+                        </h:column>
+
+                        <h:column></h:column>
+
+                        <h:column>
+                            <h:form>
+                                <h:commandButton action="#{amigosBean.doRechazarSolicitud()}" 
+                                                 value="Rechazar"
+                                                 class="btn btn-danger"
+                                                 style="margin-left: 15px">
+                                    <f:setPropertyActionListener value="#{solicitud}"
+                                                                 target="#{amigosBean.seleccionado}" />
+                                </h:commandButton>
+                            </h:form>
+                        </h:column>
+                    </h:dataTable>
                 </div>
                 <!--Búsqueda de usuarios-->
                 <div class="col-3">

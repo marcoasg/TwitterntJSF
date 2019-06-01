@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Jesús Muley
+ * @author David-PC
  */
 @Entity
 @Table(name = "amigos")
@@ -27,8 +27,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Amigos.findAll", query = "SELECT a FROM Amigos a")
     , @NamedQuery(name = "Amigos.findByAmigo1", query = "SELECT a FROM Amigos a WHERE a.amigosPK.amigo1 = :amigo1")
     , @NamedQuery(name = "Amigos.findByAmigo2", query = "SELECT a FROM Amigos a WHERE a.amigosPK.amigo2 = :amigo2")
-    , @NamedQuery(name = "Amigos.findFriendByPair", query = "SELECT a FROM Amigos a WHERE ((a.usuario.id = :amigo1 AND a.usuario1.id = :amigo2) OR (a.usuario1.id = :amigo1 AND a.usuario.id = :amigo2)) AND a.solicitudAceptada = TRUE")
-    , @NamedQuery(name = "Amigos.findPetitionByPair", query = "SELECT a FROM Amigos a WHERE ((a.usuario.id = :amigo1 AND a.usuario1.id = :amigo2) OR (a.usuario1.id = :amigo1 AND a.usuario.id = :amigo2)) AND a.solicitudAceptada = FALSE")
     , @NamedQuery(name = "Amigos.findBySolicitudAceptada", query = "SELECT a FROM Amigos a WHERE a.solicitudAceptada = :solicitudAceptada")})
 public class Amigos implements Serializable {
 

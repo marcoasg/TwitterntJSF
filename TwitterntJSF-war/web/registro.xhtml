@@ -1,12 +1,62 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:t="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
-        <title>Facelet Title</title>
+        
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="resources/css/estiloBase.css"></link>
+        <title>Regitro</title>
     </h:head>
     <h:body>
-        Hello from Facelets
-    </h:body>
+               <div class="container" style="margin-top:60px;">
+		<div class="d-flex justify-content-center">
+                    <div class="col-lg-6 py-5">
+                        <div class="bg-success text-white text-center p-3 mx-4 rounded" style="margin-bottom: -20px!important;position: relative;"> <i class="fas fa-dove" style="font-size: 100px"></i></div>
+                            <div class="bg-white px-3 py-5 rounded shadow">
+                                <h:form>
+                                    
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1"><i class="fas fa-user-edit"></i></span>
+								</div>
+                                        <h:inputText id="user" value="#{registroBean.user}" class="form-control" t:placeholder="Username"/>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                       <div class="input-group-prepend">
+                                           <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-lock"></i></span></div>
+                                           <h:inputSecret id="password" value="#{registroBean.pass}" class="form-control" t:placeholder="Password" />
+                                    </div>
+                                    <div class="input-group mb-3">
+                                       <div class="input-group-prepend">
+                                           <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-lock"></i></span></div>
+                                           <h:inputText id="nombre" value="#{registroBean.nombre}" class="form-control" t:placeholder="Nombre" />
+                                    </div>
+                                    <div class="input-group mb-3">
+                                       <div class="input-group-prepend">
+                                           <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-lock"></i></span></div>
+                                           <h:inputText id="apellidos" value="#{registroBean.apellidos}" class="form-control" t:placeholder="Apellidos" />
+                                    </div>
+                                    <div class="input-group mb-3">
+                                       <div class="input-group-prepend">
+                                           <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-lock"></i></span></div>
+                                           <h:inputText id="email" value="#{registroBean.email}" class="form-control" t:placeholder="Email" />
+                                    </div>
+                                        <div class="text-right">
+                                            <h:commandButton value="Confirmar" action="#{registroBean.doRegistro()}" class="btn btn-success"></h:commandButton>
+                                        </div>
+				</h:form>
+                            </div>
+			</div>
+                </div>
+            </div>
+                                            
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> 
+   </h:body>
 </html>
 

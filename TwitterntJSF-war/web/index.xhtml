@@ -13,7 +13,9 @@
     </h:head>
     <h:body>
           <!--Menú de navegación-->
+          <div class="row">
         <h:form>
+            <div class="col-8">
             <div class="card text-center" style="background-color: #5cb85c">
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
@@ -32,17 +34,21 @@
                         <li class="nav-item">
                             <a class="nav-link" style="color: white" href="grupos.jsf">Grupos</a>
                         </li>
+                        <div class="col-4">
                         <li class="nav-item" style="margin-left: 1400px">
+                            </div>
+                
                             <h:commandLink action="#{loginBean.logout()}" class="nav-link" style="color: white">
                                 Cerrar sesión
                             </h:commandLink>
                         </li>
+                        </div>
                     </ul>
                 </div>
             </div>
         </h:form>
         <br/>
-          
+          </div>
           
           
           

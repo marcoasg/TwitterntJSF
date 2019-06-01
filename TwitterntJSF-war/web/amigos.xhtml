@@ -2,39 +2,80 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
         <link rel="stylesheet" href="resources/css/estiloBase.css"></link>
         <title>Amigos</title>
     </h:head>
     <h:body>
-        <h1>Mis amigos</h1>
-        <br/>
-        <h:dataTable value="#{amigosBean.listaAmigos}" var="amigo">
-            <h:column>
-                <h:form>
-                    <h:commandLink action="#{perfilBean.cargaPerfil()}" class="btn btn-link">
-                        #{amigo.nombre}&nbsp;#{amigo.apellidos}
-                        <f:setPropertyActionListener value="#{amigo}"
-                                                     target="#{perfilBean.usuario}" />
-                    </h:commandLink>
-                </h:form>
-            </h:column>
-            <h:column></h:column>
-            <h:column>
-                <h:form>
-                    <h:commandButton action="#{amigosBean.doEliminar()}" 
-                                     value="Eliminar"
-                                     class="btn btn-success"
-                                     style="margin-left: 15px">
-                                     <f:setPropertyActionListener value="#{amigo}"
-                                                                  target="#{amigosBean.seleccionado}" />
-                    </h:commandButton>
-                </h:form>
-            </h:column>
-        </h:dataTable>
-        
+        <!--Menú de navegación-->
+        <h:form>
+            <div class="card text-center" style="background-color: #5cb85c">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: white" href="index.jsf">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: white" href="perfilPropio.jsf">Perfil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" style="color: #5cb85c" href="amigos.jsf"><b>Amigos</b></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: white" href="grupos.jsf">Grupos</a>
+                        </li>
+                        <li class="nav-item">
+                            <h:commandLink action="#{loginBean.logout()}" class="nav-link" style="color: white">
+                            Cerrar sesión
+                            </h:commandLink>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </h:form>
+        <!--Página de amigos-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-4">
+                    <h1>Mis amigos</h1>
+                    <br/>
+                    <h:dataTable value="#{amigosBean.listaAmigos}" var="amigo">
+                        <h:column>
+                            <h:form>
+                                <h:commandLink action="#{perfilBean.cargaPerfil()}" class="btn btn-link">
+                                    #{amigo.nombre}&nbsp;#{amigo.apellidos}
+                                    <f:setPropertyActionListener value="#{amigo}"
+                                                                 target="#{perfilBean.usuario}" />
+                                </h:commandLink>
+                            </h:form>
+                        </h:column>
+                        <h:column></h:column>
+                        <h:column>
+                            <h:form>
+                                <h:commandButton action="#{amigosBean.doEliminar()}" 
+                                                 value="Eliminar"
+                                                 class="btn btn-success"
+                                                 style="margin-left: 15px">
+                                    <f:setPropertyActionListener value="#{amigo}"
+                                                                 target="#{amigosBean.seleccionado}" />
+                                </h:commandButton>
+                            </h:form>
+                        </h:column>
+                    </h:dataTable>
+                </div>
+                <div class="col-5">
+                    
+                </div>
+                <!--Búsqueda de usuarios-->
+                <div class="col-3">
+                    <ui:include src="busquedaUsuarios.xhtml" />
+                </div>
+            </div>
+        </div>
+
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

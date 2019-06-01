@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import twitternt.dao.AmigosFacade;
 import twitternt.entity.Usuario;
@@ -20,7 +20,7 @@ import twitternt.entity.Usuario;
  * @author Trigi
  */
 @Named(value = "amigosBean")
-@RequestScoped
+@SessionScoped
 public class AmigosBean implements Serializable {
 
     @EJB
@@ -46,7 +46,6 @@ public class AmigosBean implements Serializable {
     
     public String doEliminar(){
         this.amigosFacade.remove(amigosFacade.findFriendByPair(seleccionado.getId(), loginBean.getUserId()));
-        init();
         return null;
     }
     

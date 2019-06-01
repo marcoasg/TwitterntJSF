@@ -37,10 +37,6 @@ public class LoginBean implements Serializable {
      */
     public LoginBean() {
     }
-
-    public Integer getUserId() {
-        return 1;
-    }
     
     @PostConstruct
     public void init(){
@@ -50,5 +46,31 @@ public class LoginBean implements Serializable {
     public void doComprobacion(String user, String pass){
       
     }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public List<Usuario> getListaUsuarios() {
+        return listaUsuarios;
+    }
+
+    public void setListaUsuarios(List<Usuario> listaUsuarios) {
+        this.listaUsuarios = listaUsuarios;
+    }
+
+    public Integer getUserId() {
+        return 1;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+    
+    
 }
 

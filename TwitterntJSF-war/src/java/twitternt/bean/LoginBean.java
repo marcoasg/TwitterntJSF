@@ -30,10 +30,9 @@ public class LoginBean implements Serializable {
     protected UsuarioBean usuarioBean;
     
     protected Usuario usuario;
-    protected List<Usuario> listaUsuarios;
     protected String user;
     protected String pass;
-    Integer userId;
+    protected Integer userId;
     /**
      * Creates a new instance of LoginBean
      */
@@ -55,9 +54,17 @@ public class LoginBean implements Serializable {
         return "index";
       }
       return "login";
-      
     }
 
+    
+    public String logout() {
+        this.usuario = null;
+        this.user = null;
+        this.pass = null;
+        this.userId = null;
+        return "login";
+    }
+    
     public UsuarioFacade getUsuarioFacade() {
         return usuarioFacade;
     }
@@ -90,10 +97,7 @@ public class LoginBean implements Serializable {
         this.pass = pass;
     }
     
-    public String logout() {
-        //hacer logout...
-        return "login";
-    }
+    
 
     public Usuario getUsuario() {
         return usuario;
@@ -103,13 +107,7 @@ public class LoginBean implements Serializable {
         this.usuario = usuario;
     }
 
-    public List<Usuario> getListaUsuarios() {
-        return listaUsuarios;
-    }
-
-    public void setListaUsuarios(List<Usuario> listaUsuarios) {
-        this.listaUsuarios = listaUsuarios;
-    }
+   
 
     public Integer getUserId() {
         return this.userId;

@@ -14,6 +14,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import twitternt.dao.AmigosFacade;
 import twitternt.entity.Amigos;
+import twitternt.entity.AmigosPK;
 import twitternt.entity.Usuario;
 
 /**
@@ -65,6 +66,19 @@ public class AmigosBean implements Serializable {
         Amigos solicitud = amigosFacade.findPetitionByPair(seleccionado.getId(), loginBean.getUserId());
         amigosFacade.remove(solicitud);
         init();
+        return null;
+    }
+    
+    public String doEnviarSolicitud() {
+        Amigos solicitud = new Amigos();
+        solicitud.setUsuario(loginBean.getUsuario());
+        solicitud.setUsuario1(seleccionado);
+        solicitud.setSolicitudAceptada(false);
+        
+        AmigosPK pk = new AmigosPK(loginBean.getUserId(), seleccionado.getId());
+        solicitud.setAmigosPK(pk);
+        
+        amigosFacade.create(solicitud);
         return null;
     }
     

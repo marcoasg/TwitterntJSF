@@ -15,7 +15,6 @@
                 <h:column>
                     <h:commandButton value ="#{usuario.nombre} #{usuario.apellidos} (@#{usuario.nombreUsuario})"
                                      action="#{perfilBean.cargaPerfil()}" class="btn btn-light">
-
                         <f:setPropertyActionListener value="#{usuario}"
                                                      target="#{perfilBean.usuario}"/>
                     </h:commandButton>

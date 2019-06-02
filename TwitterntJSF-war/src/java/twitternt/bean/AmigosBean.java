@@ -69,19 +69,6 @@ public class AmigosBean implements Serializable {
         return null;
     }
     
-    public String doEnviarSolicitud() {
-        Amigos solicitud = new Amigos();
-        solicitud.setUsuario(loginBean.getUsuario());
-        solicitud.setUsuario1(seleccionado);
-        solicitud.setSolicitudAceptada(false);
-        
-        AmigosPK pk = new AmigosPK(loginBean.getUserId(), seleccionado.getId());
-        solicitud.setAmigosPK(pk);
-        
-        amigosFacade.create(solicitud);
-        return null;
-    }
-    
     public List<Usuario> getListaAmigos(){
         return listaAmigos;
     }

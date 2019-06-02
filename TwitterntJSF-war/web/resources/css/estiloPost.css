@@ -1,0 +1,151 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 02-jun-2019, 19:49:18
+    Author     : David-PC
+*/
+
+@import "bourbon";
+
+$transition: all .4s;
+
+$thick-border: 2px solid;
+$thin-border: 1px solid;
+
+$ava-size: 80px;
+
+$brand-color: hsla(194, 85%, 56%, 1);
+$text-color: hsla(0, 0%, 7%, 1);
+$accent-color: hsla(0, 0%, 73%, 1);
+
+
+
+html {
+  display: table;
+  height: 100%;
+  margin: auto;
+}
+
+
+
+* {
+  box-sizing: border-box;
+}
+
+
+
+.container {
+  position: relative;
+  border: 2px solid hsla(0, 0%, 73%, 1);
+  padding: 10px 10px 10px 60px;
+  width: 660px;
+  background-color: white;
+  margin-left: 200px;
+  cursor: pointer;
+  transition: all .4s;
+  &:hover {
+    border: 2px solid hsla(194, 85%, 56%, 1);
+  }
+}
+
+.avatar {
+  float: left;
+  position: absolute;
+  left: 27px;
+  @include size(20px);
+  border-radius: 100px;
+  transition: all .4s;
+  &:hover {
+    border-radius: 0px;
+  }
+}
+
+.tweet-time {
+  float: right;
+  color: hsla(0, 0%, 73%, 1);
+  transition: all .4s;
+  border-bottom: 1px solid white;
+  &:hover {
+    border-bottom: 1px solid hsla(0, 0%, 73%, 1);
+  }
+}
+
+.push {
+  margin-left: 70px;
+}
+
+.user {
+  @include clearfix;
+}
+
+.name {
+  font-weight: bold;
+  transition: all .4s;
+  border-bottom: 1px solid white;
+  &:hover {
+    border-bottom: 1px solid hsla(0, 0%, 7%, 1);
+  }
+}
+
+.username {
+  font-weight: normal;
+  color: hsla(0, 0%, 73%, 1);
+  margin-left: 10px;
+  border-bottom: 1px solid white;
+}
+
+.tweet {
+  margin: 20px 0;
+  font-size: 15pt;
+  font-family: helvetica;
+}
+
+.at, .tag {
+  color: hsla(194, 85%, 56%, 1);
+  transition: all .4s;
+  border-bottom: 2px solid white;
+  &:hover {
+    border-bottom: 2px solid hsla(194, 85%, 56%, 1);
+  }
+}
+
+
+
+.fa {
+  color: hsla(0, 0%, 73%, 1);
+  margin-right: 40px;
+  font-size: 1.5em;
+  transition: all .4s;
+}
+
+.fa-reply:hover {
+  color: hsla(194, 85%, 56%, 1);
+}
+
+.fa-retweet:hover {
+  color: hsla(101, 85%, 35%, 1);
+}
+
+.fa-star:hover {
+  color: hsla(45, 85%, 50%, 1);
+}
+
+.fa-ellipsis-h:hover {
+  color: hsla(0, 0%, 7%, 1);
+}
+
+.fa-eye {
+  float: right;
+  margin-right: 0;
+  &:hover {
+    color: hsla(194, 85%, 56%, 1);
+  }
+}
+
+.icon-number {
+  font-size: 0.66em;
+  font-family: helvetica;
+}

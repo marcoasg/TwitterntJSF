@@ -35,8 +35,9 @@ public class recuperarPassBean {
     private Usuario usuario; 
     private String nombreUsuario;
     private String email;
-    private Random random;
     private int codigoRecuperacion;
+
+  
 
     /**
      * Creates a new instance of recuperarPassBean
@@ -46,12 +47,12 @@ public class recuperarPassBean {
     
      @PostConstruct
     private void init(){
-      this.usuario = this.usuarioFacade.findByUserName(this.nombreUsuario);
-       if(this.usuario != null){
-        this.email = this.usuario.getEmail();
-        this.random = new Random();
-        this.codigoRecuperacion=random.nextInt(8);
-    }
+        this.usuario = this.usuarioFacade.findByUserName(this.nombreUsuario);
+            if(this.usuario != null){
+                this.email = this.usuario.getEmail();
+                Random random = new Random();
+                this.codigoRecuperacion = random.nextInt(8);
+          }
     }
 
     public Usuario getUsuario() {
@@ -76,6 +77,14 @@ public class recuperarPassBean {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    
+      public int getCodigoRecuperacion() {
+        return codigoRecuperacion;
+    }
+
+    public void setCodigoRecuperacion(int codigoRecuperacion) {
+        this.codigoRecuperacion = codigoRecuperacion;
     }
     
     public String enviarMail(){
@@ -108,7 +117,7 @@ public class recuperarPassBean {
             message.setFrom(new InternetAddress("aa@aa.com"));
             message.setRecipient(Message.RecipientType.TO, InternetAddress.parse(email)[0]);
             message.setSubject("Recupera tu contraseña!!!");
-            message.setText(usuario + "el numero de recuperacion de contraseña" + codigoRecuperacion);
+            message.setText(nombreUsuario + "el numero de recuperacion de contraseña" + codigoRecuperacion);
             Transport.send(message);
             
             return "nuevaPass";

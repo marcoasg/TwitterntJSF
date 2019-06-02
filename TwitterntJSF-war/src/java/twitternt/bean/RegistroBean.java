@@ -106,18 +106,20 @@ public class RegistroBean {
     }
     
     public String doRegistro(){
-        this.init();
-        if(this.usuario == null && this.pass.equals(this.pass2)){
-            this.usuario = new Usuario();
-            this.usuario.setNombreUsuario(this.user);
-            this.usuario.setPassword(this.pass);
-            this.usuario.setNombre(this.nombre);
-            this.usuario.setApellidos(this.apellidos);
-            this.usuario.setEmail(this.email);
-            this.usuarioFacade.create(this.usuario);
-            return "login";
+        if(this.user.equals("") == false && this.nombre != null && this.pass != null && this.pass2 != null
+           && this.apellidos != null && this.email != null){
+             this.init();
+             if(this.usuario == null && this.pass.equals(this.pass2)){
+                this.usuario = new Usuario();
+                this.usuario.setNombreUsuario(this.user);
+                this.usuario.setPassword(this.pass);
+                this.usuario.setNombre(this.nombre);
+                this.usuario.setApellidos(this.apellidos);
+                 this.usuario.setEmail(this.email);
+                this.usuarioFacade.create(this.usuario);
+                 return "login";
+            }
         }
-        
         return "registro";
     }
 }

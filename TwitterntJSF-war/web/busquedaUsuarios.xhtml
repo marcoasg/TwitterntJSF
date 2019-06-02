@@ -11,15 +11,18 @@
             <f:ajax event="keyup" listener="#{busquedaUsuariosBean.doBusqueda()}"
                     render="resultadoBusqueda"/>
         </h:inputText>
-            <h:dataTable id="resultadoBusqueda" value="#{busquedaUsuariosBean.resultadoBusqueda}" var="usuario" class="table table-sm mb-0">
-                <h:column>
-                    <h:commandButton value ="#{usuario.nombre} #{usuario.apellidos} (@#{usuario.nombreUsuario})"
-                                     action="#{perfilBean.cargaPerfil()}" class="btn btn-light">
-                        <f:setPropertyActionListener value="#{usuario}"
-                                                     target="#{perfilBean.usuario}"/>
-                    </h:commandButton>
-                </h:column>
-            </h:dataTable>
     </h:form>
+    <h:dataTable id="resultadoBusqueda" value="#{busquedaUsuariosBean.resultadoBusqueda}" var="usuario">
+        <h:column>
+            <h:form>
+                <h:commandLink action="#{perfilBean.cargaPerfil()}" class="btn btn-link">
+                    #{usuario.nombre}&nbsp;#{usuario.apellidos}&nbsp;(@#{usuario.nombreUsuario})
+                    <f:setPropertyActionListener value="#{usuario}"
+                                                 target="#{perfilBean.usuario}"/>
+                </h:commandLink>
+            </h:form>
+        </h:column>
+    </h:dataTable>
+
 </ui:composition>
 

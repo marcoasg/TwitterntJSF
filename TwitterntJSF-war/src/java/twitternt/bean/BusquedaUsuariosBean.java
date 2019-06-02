@@ -5,10 +5,11 @@
  */
 package twitternt.bean;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import twitternt.dao.UsuarioFacade;
 import twitternt.entity.Usuario;
 
@@ -17,8 +18,8 @@ import twitternt.entity.Usuario;
  * @author Trigi
  */
 @Named(value = "busquedaUsuariosBean")
-@RequestScoped
-public class BusquedaUsuariosBean {
+@SessionScoped
+public class BusquedaUsuariosBean implements Serializable {
 
     @EJB
     private UsuarioFacade usuarioFacade;

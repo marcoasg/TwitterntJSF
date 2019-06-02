@@ -5,29 +5,33 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous"/>
         <link rel="stylesheet" href="resources/css/estiloBase.css"></link>
         <title>Amigos</title>
     </h:head>
     <h:body>
-        <!--Menú de navegación-->
+          <!--Menú de navegación-->
         <h:form>
             <div class="card text-center" style="background-color: #5cb85c">
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
-                            <a class="nav-link" style="color: white" href="index.jsf">Inicio</a>
+                            <a class="nav-link" style="color: #5cb85c" href="index.jsf"><i class="fas fa-dove" style="font-size: 20px; color: white"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " style="color: white" href="index.jsf"><b>Inicio</b></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" style="color: white" href="perfilPropio.jsf">Perfil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" style="color: #5cb85c" href="amigos.jsf"><b>Amigos</b></a>
+                            <a class="nav-link active" style="color: #5cb85c " href="amigos.jsf">Amigos</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" style="color: white" href="grupos.jsf">Grupos</a>
                         </li>
-                        <li class="nav-item" style="margin-left: 900px">
+                        <li class="nav-item" style="margin-left: 1400px">
                             <h:commandLink action="#{loginBean.logout()}" class="nav-link" style="color: white">
                                 Cerrar sesión
                             </h:commandLink>
@@ -36,6 +40,8 @@
                 </div>
             </div>
         </h:form>
+        <br/>
+          
         <!--Página de amigos-->
         <div class="container-fluid">
             <div class="row">

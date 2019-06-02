@@ -26,19 +26,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author adry1
+ * @author David-PC
  */
 @Entity
 @Table(name = "post")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Post.findAll", query = "SELECT p FROM Post p"),
-    @NamedQuery(name = "Post.findById", query = "SELECT p FROM Post p WHERE p.id = :id"),
-    @NamedQuery(name = "Post.findByTexto", query = "SELECT p FROM Post p WHERE p.texto = :texto"),
-    @NamedQuery(name = "Post.findByImagen", query = "SELECT p FROM Post p WHERE p.imagen = :imagen"),
-    @NamedQuery(name = "Post.findByVisibilidad", query = "SELECT p FROM Post p WHERE p.visibilidad = :visibilidad"),
-    @NamedQuery(name = "Post.findByFechaPublicacion", query = "SELECT p FROM Post p WHERE p.fechaPublicacion = :fechaPublicacion")})
+    @NamedQuery(name = "Post.findAll", query = "SELECT p FROM Post p")
+    , @NamedQuery(name = "Post.findById", query = "SELECT p FROM Post p WHERE p.id = :id")
+    , @NamedQuery(name = "Post.findByTexto", query = "SELECT p FROM Post p WHERE p.texto = :texto")
+    , @NamedQuery(name = "Post.findByImagen", query = "SELECT p FROM Post p WHERE p.imagen = :imagen")
+    , @NamedQuery(name = "Post.findByVisibilidad", query = "SELECT p FROM Post p WHERE p.visibilidad = :visibilidad")
+    , @NamedQuery(name = "Post.findByFechaPublicacion", query = "SELECT p FROM Post p WHERE p.fechaPublicacion = :fechaPublicacion")})
 public class Post implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

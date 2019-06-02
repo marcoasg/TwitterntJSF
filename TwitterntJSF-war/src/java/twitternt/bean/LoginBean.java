@@ -11,7 +11,10 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 import twitternt.dao.UsuarioFacade;
 import twitternt.entity.Usuario;
 
@@ -30,8 +33,9 @@ public class LoginBean implements Serializable {
     protected UsuarioBean usuarioBean;
     
     protected Usuario usuario;
-    protected List<Usuario> listaUsuarios;
-    Integer userId;
+    protected String user;
+    protected String pass;
+    protected Integer userId;
     /**
      * Creates a new instance of LoginBean
      */
@@ -40,17 +44,65 @@ public class LoginBean implements Serializable {
     
     @PostConstruct
     public void init(){
-       this.listaUsuarios = this.usuarioFacade.findAll();
+       this.usuario = this.usuarioFacade.findByUserName(this.user);
+       if(this.usuario != null){
+        this.userId = this.usuario.getId();
+       }
     }
     
-    public void doComprobacion(String user, String pass){
-      
+    
+    public String doLogin(){
+        System.out.println(user + "," + pass);
+      this.init();
+      if(this.usuario != null && this.usuario.getPassword().equals(pass)){
+        return "index";
+      }
+      return "login";
     }
+
     
     public String logout() {
-        //hacer logout...
+        FacesContext context = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = context.getExternalContext();
+        Object session = externalContext.getSession(false);
+        HttpSession httpSession = (HttpSession) session;
+        httpSession.invalidate();
         return "login";
     }
+    
+    public UsuarioFacade getUsuarioFacade() {
+        return usuarioFacade;
+    }
+
+    public void setUsuarioFacade(UsuarioFacade usuarioFacade) {
+        this.usuarioFacade = usuarioFacade;
+    }
+
+    public UsuarioBean getUsuarioBean() {
+        return usuarioBean;
+    }
+
+    public void setUsuarioBean(UsuarioBean usuarioBean) {
+        this.usuarioBean = usuarioBean;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+    
+    
 
     public Usuario getUsuario() {
         return usuario;
@@ -60,16 +112,10 @@ public class LoginBean implements Serializable {
         this.usuario = usuario;
     }
 
-    public List<Usuario> getListaUsuarios() {
-        return listaUsuarios;
-    }
-
-    public void setListaUsuarios(List<Usuario> listaUsuarios) {
-        this.listaUsuarios = listaUsuarios;
-    }
+   
 
     public Integer getUserId() {
-        return 1;
+        return this.userId;
     }
 
     public void setUserId(Integer userId) {

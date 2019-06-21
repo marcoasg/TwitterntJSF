@@ -122,4 +122,9 @@ public class RegistroBean {
         }
         return "registro";
     }
+    
+    
+    public String doCancelar(){
+        return "login";
+    }
 }

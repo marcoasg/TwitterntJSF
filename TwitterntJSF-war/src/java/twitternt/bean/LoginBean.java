@@ -35,7 +35,13 @@ public class LoginBean implements Serializable {
     protected Usuario usuario;
     protected String user;
     protected String pass;
+    protected String passRep;
     protected Integer userId;
+    
+    protected String nombre;
+    protected String apellidos;
+    protected String email;
+    
     /**
      * Creates a new instance of LoginBean
      */
@@ -47,6 +53,12 @@ public class LoginBean implements Serializable {
        this.usuario = this.usuarioFacade.findByUserName(this.user);
        if(this.usuario != null){
         this.userId = this.usuario.getId();
+        this.user = this.usuario.getNombreUsuario();
+        this.pass = this.usuario.getPassword();
+        this.passRep = this.pass;
+        this.nombre = this.usuario.getNombre();
+        this.apellidos = this.usuario.getApellidos();
+        this.email = this.usuario.getEmail();
        }
     }
     
@@ -121,7 +133,50 @@ public class LoginBean implements Serializable {
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassRep() {
+        return passRep;
+    }
+
+    public void setPassRep(String passRep) {
+        this.passRep = passRep;
+    }
     
-    
+    public String doEditar(){
+        if(this.pass.equals(this.passRep)){
+            this.usuario.setNombre(this.nombre);
+            this.usuario.setPassword(this.pass);
+            this.usuario.setApellidos(this.apellidos);
+            this.usuario.setEmail(this.email);
+            this.usuarioFacade.edit(this.usuario);
+        }else{
+            this.init();
+        }
+        return "";
+    }
 }
 

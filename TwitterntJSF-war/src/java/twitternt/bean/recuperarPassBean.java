@@ -50,8 +50,7 @@ public class recuperarPassBean {
         this.usuario = this.usuarioFacade.findByUserName(this.nombreUsuario);
             if(this.usuario != null){
                 this.email = this.usuario.getEmail();
-                Random random = new Random();
-                this.codigoRecuperacion = random.nextInt(8);
+                codigoRecuperacion = (int) (Math.random() * (Math.pow(10, 8))) + 1;
           }
     }
 
@@ -94,38 +93,38 @@ public class recuperarPassBean {
             return "recuperarPass";
         }
         
-        final String mail="oliveTwitternt@gmail.com";
+        final String mail="olivetwitternt@gmail.com";
         final String pwd="olivemaster69";
         
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "smtp.gamil.com");
+        props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
         
    
-        Session session = Session.getInstance(props, 
-                new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication(){
-                    return new PasswordAuthentication(mail, pwd);
-                }
-                });
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(mail, pwd);
+            }       
+        });
         
         try{
-        
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("aa@aa.com"));
-            message.setRecipient(Message.RecipientType.TO, InternetAddress.parse(email)[0]);
-            message.setSubject("Recupera tu contraseña!!!");
-            message.setText(nombreUsuario + "el numero de recuperacion de contraseña" + codigoRecuperacion);
+            message.setFrom(new InternetAddress(mail));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
+            message.setSubject("TWITTERNT: Recupera tu contraseña.");
+            message.setText("Hola " + nombreUsuario + ", su código de recuperación de contraseña es: " + codigoRecuperacion);
             Transport.send(message);
             
-            return "nuevaPass";
+            return "codigoPass";
             
         } catch (MessagingException ex){
-            throw new RuntimeException(ex);
+            return "recuperarPass";
         }
-      /*  finally {return "recuperarPass";} */
+      
+            
+        
 
         
     }

@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <h:head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
@@ -41,42 +42,59 @@
             </div>
         </h:form>
         <br/>
-          
-        <h1>Mis Grupos</h1>
-            <h:dataTable value="#{gruposBean.grupos}" var="grupo">
-                <h:column>
+        
+        <!--Página de grupos-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-4">
+            <h1>Mis Grupos</h1>
+                <h:dataTable value="#{gruposBean.grupos}" var="grupo">
+                    <h:column>
                     #{grupo.getGrupo1().getNombre()}
-                </h:column>
-                <h:column></h:column>
-                <h:column>
-                <h:form>
-                    <h:commandButton action="#{gruposBean.doEliminar()}" 
-                                     value="Salir" class="btn btn-success"
-                                     style="margin-left: 15px">
-                                     <f:setPropertyActionListener value="#{grupo}"
-                                                                  target="#{gruposBean.grupoSeleccionado}" />
-                    </h:commandButton>
-                </h:form>
-                </h:column>
-            </h:dataTable>
-        <br/>
-        <h1>Grupos que Administro</h1>
-            <h:dataTable value="#{gruposBean.gruposAdmin}" var="grupoAdmin">
-                <h:column>
-                    #{grupoAdmin.nombre}
-                </h:column>
-                <h:column></h:column>
-                 <h:column>
-                <h:form>
-                    <h:commandButton action="#{gruposBean.doEliminar()}" 
-                                     value="Eliminar" class="btn btn-success"
-                                     style="margin-left: 15px">
-                                     <f:setPropertyActionListener value="#{grupo}"
-                                                                  target="#{gruposBean.grupoAdminSeleccionado}" />
-                    </h:commandButton>
-                </h:form>
-                </h:column>
-            </h:dataTable>
+                    </h:column>
+                    <h:column></h:column>
+                    <h:column>
+                    <h:form>
+                        <h:commandButton action="#{gruposBean.doEliminar()}" 
+                            value="Salir" class="btn btn-success"
+                            style="margin-left: 15px">
+                        <f:setPropertyActionListener value="#{grupo}"
+                            target="#{gruposBean.grupoSeleccionado}" />
+                        </h:commandButton>
+                        </h:form>
+                        </h:column>
+                </h:dataTable>
+        </div>
+        <div class="col-4">
+            <h1>Grupos que Administro</h1>
+                <h:dataTable value="#{gruposBean.gruposAdmin}" var="grupoAdmin">
+                    <h:column>
+                        #{grupoAdmin.nombre}
+                    </h:column>
+                    <h:column></h:column>
+                     <h:column>
+                    <h:form>
+                        <h:commandButton action="#{gruposBean.doEliminar()}" 
+                                         value="Eliminar" class="btn btn-success"
+                                         style="margin-left: 15px">
+                                         <f:setPropertyActionListener value="#{grupo}"
+                                                                      target="#{gruposBean.grupoAdminSeleccionado}" />
+                        </h:commandButton>
+                    </h:form>
+                    </h:column>
+                </h:dataTable>
+        </div>
+             <!--Búsqueda de Grupos-->
+                <div class="col-3">
+                    <ui:include src="busquedaUsuarios.xhtml"/>
+                </div>
+        </div>
+       </div>
+        
+        <h:form>
+            <h:commandButton action="crearGrupo" value="Nuevo Grupo" class="btn btn-success"></h:commandButton>
+        </h:form>
+                           
                 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

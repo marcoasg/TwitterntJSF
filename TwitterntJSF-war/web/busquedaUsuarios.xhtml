@@ -15,7 +15,7 @@
     <h:dataTable id="resultadoBusqueda" value="#{busquedaUsuariosBean.resultadoBusqueda}" var="usuario">
         <h:column>
             <h:form>
-                <h:commandLink action="#{perfilBean.cargaPerfil()}" class="btn btn-link">
+                <h:commandLink action="#{loginBean.doSeleccionarUsuario(usuario)}" class="btn btn-link">
                     #{usuario.nombre}&nbsp;#{usuario.apellidos}&nbsp;(@#{usuario.nombreUsuario})
                     <f:setPropertyActionListener value="#{usuario}"
                                                  target="#{perfilBean.usuario}"/>

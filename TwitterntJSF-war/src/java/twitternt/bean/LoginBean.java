@@ -48,6 +48,7 @@ public class LoginBean implements Serializable {
     protected String apellidos;
     protected String email;
     protected List<Post> listaPostPropios;
+    protected Usuario usuarioSeleccionado;
     
     /**
      * Creates a new instance of LoginBean
@@ -173,6 +174,14 @@ public class LoginBean implements Serializable {
         this.passRep = passRep;
     }
 
+    public Usuario getUsuarioSeleccionado() {
+        return usuarioSeleccionado;
+    }
+
+    public void setUsuarioSeleccionado(Usuario usuarioSeleccionado) {
+        this.usuarioSeleccionado = usuarioSeleccionado;
+    }
+
     public List<Post> getListaPostPropios() {
         return listaPostPropios;
     }
@@ -211,6 +220,10 @@ public class LoginBean implements Serializable {
             this.init();
         }
         return "";
+    }
+    public String doSeleccionarUsuario(Usuario u){
+        usuarioSeleccionado = u;
+        return "perfil.jsf";
     }
 }
 

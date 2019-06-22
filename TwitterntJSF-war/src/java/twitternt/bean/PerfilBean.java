@@ -5,6 +5,7 @@
  */
 package twitternt.bean;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -24,7 +25,7 @@ public class PerfilBean {
 
     @EJB
     private AmigosFacade amigosFacade;
-
+    private Boolean noEsAmigo;
     private Usuario usuario;
     
     @Inject
@@ -34,10 +35,19 @@ public class PerfilBean {
      */
     public PerfilBean() {
     }
-
-    public String cargaPerfil() {
-        return "perfil.jsf";
+    
+    @PostConstruct
+    private void init(){
+        usuario = loginBean.getUsuarioSeleccionado();
+        try{
+        noEsAmigo = !((amigosFacade.findFriendByPair(loginBean.getUsuario().getId(), this.usuario.getId()) != null)
+                    ||(amigosFacade.findFriendByPair( this.usuario.getId(), loginBean.getUsuario().getId()) != null));
+        } 
+        catch(Exception e){
+            noEsAmigo = true;
+        }
     }
+
 
     public String doEnviarSolicitud() {
         Amigos solicitud = new Amigos();
@@ -49,6 +59,7 @@ public class PerfilBean {
         solicitud.setAmigosPK(pk);
 
         amigosFacade.create(solicitud);
+        this.init();
         return null;
     }
     
@@ -63,4 +74,29 @@ public class PerfilBean {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    public Boolean getNoEsAmigo() {
+        return noEsAmigo;
+    }
+
+    public void setNoEsAmigo(Boolean noEsAmigo) {
+        this.noEsAmigo = noEsAmigo;
+    }
+
+    public AmigosFacade getAmigosFacade() {
+        return amigosFacade;
+    }
+
+    public void setAmigosFacade(AmigosFacade amigosFacade) {
+        this.amigosFacade = amigosFacade;
+    }
+
+    public LoginBean getLoginBean() {
+        return loginBean;
+    }
+
+    public void setLoginBean(LoginBean loginBean) {
+        this.loginBean = loginBean;
+    }
+    
 }

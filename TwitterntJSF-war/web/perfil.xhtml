@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous"/>
         <link rel="stylesheet" href="resources/css/estiloBase.css"></link>
+        <link rel="stylesheet" href="resources/css/estiloPost.css"></link>
         <title>Perfil: @#{perfilBean.usuario.nombreUsuario}</title>
     </h:head>
     <h:body>
@@ -40,14 +41,87 @@
             </div>
         </h:form>
 
+        
+        
+        
         <h1>Perfil de #{perfilBean.usuario.nombre}</h1>
-        <h:form>
-            <h:commandButton action="#{perfilBean.doEnviarSolicitud()}" 
-                             value="Enviar solicitud de amistad"
-                             class="btn btn-success"
-                             style="margin-left: 15px"
-                             rendered="#{perfilBean.isSolicitudDisponible()}"/>
-        </h:form>
+          <div class="container-fluid">
+            <div class="row">
+                <div class="col-4">
+                    <br/>
+                    <h:form>
+                        <h6>Nombre de usuario</h6>
+                        <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1"><i class="fas fa-user-edit"></i></span>
+								</div>
+                            <h:outputText id="user" value="#{perfilBean.usuario.nombreUsuario}" class="form-control" />
+                                    </div>
+
+                        
+                        <h6>Nombre</h6>
+                        <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1"><i class="fas fa-clipboard-list"></i></span>
+								</div>
+                                        <h:outputText id="nombre" value="#{perfilBean.usuario.nombre}" class="form-control"/>
+                                    </div>
+                        
+                        <h6>Apellidos</h6>
+                        <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1"><i class="fas fa-clipboard-list"></i></span>
+								</div>
+                                        <h:outputText id="apellidos" value="#{perfilBean.usuario.apellidos}" class="form-control"/>
+                                    </div>
+                        
+                        <h6>E-mail</h6>
+                        <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1"><i class="fas fa-at"></i></span>
+								</div>
+                                        <h:outputText id="email" value="#{perfilBean.usuario.email}" class="form-control"/> 
+                                    </div>
+                        
+                        <h:commandButton value="Enviar solicitud de amistad" rendered="#{perfilBean.noEsAmigo}" action="#{perfilBean.doEnviarSolicitud()}"/>
+                    </h:form>                 
+                </div>
+                
+                
+                <div class="col-4">
+                    <h:dataTable id="listaPost" value="#{perfilBean.usuario.postList}" var="post">
+          <h:column>   
+              <div class="container">
+    
+ <img src="https://i.imgur.com/sgSYItU.jpg" style="width:80px; height:80px;" alt="avatar" class="avatar"/>
+  
+ <time class="tweet-time">#{post.fechaPublicacion}</time>
+  
+  <div class="push">
+    
+    <div class="user">
+        <div class="user-string"><span class="name">#{post.usuario.nombre}</span><span class="username">@#{post.usuario.nombreUsuario}</span></div>
+    </div>
+    
+      <blockquote class="tweet">#{post.texto}</blockquote>
+
+   
+    
+  </div>
+  
+</div>
+          </h:column>            
+        </h:dataTable>
+        </div>
+            </div>
+            
+                
+              
+        
+            
+            
+            
+        </div>
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

@@ -83,7 +83,7 @@
                                         <h:outputText id="email" value="#{perfilBean.usuario.email}" class="form-control"/> 
                                     </div>
                         
-                        <h:commandButton value="Enviar solicitud de amistad" rendered="#{perfilBean.noEsAmigo}" action="#{perfilBean.doEnviarSolicitud()}"/>
+                        <h:commandButton value="Enviar solicitud de amistad" rendered="#{perfilBean.solicitudDisponible}" action="#{perfilBean.doEnviarSolicitud()}"/>
                     </h:form>                 
                 </div>
                 

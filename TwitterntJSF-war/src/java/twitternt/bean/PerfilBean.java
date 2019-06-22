@@ -37,16 +37,16 @@ public class PerfilBean {
     }
     
     @PostConstruct
-    private void init(){
+    public void init(){
         usuario = loginBean.getUsuarioSeleccionado();
-        try{
-        noEsAmigo = !((amigosFacade.findFriendByPair(loginBean.getUsuario().getId(), this.usuario.getId()) != null)
-                    ||(amigosFacade.findFriendByPair( this.usuario.getId(), loginBean.getUsuario().getId()) != null));
-        } 
-        catch(Exception e){
-            noEsAmigo = true;
-        }
-    }
+/*      try{
+ *        noEsAmigo = !((amigosFacade.findFriendByPair(loginBean.getUsuario().getId(), this.usuario.getId()) != null)
+ *                   ||(amigosFacade.findFriendByPair( this.usuario.getId(), loginBean.getUsuario().getId()) != null));
+ *       } 
+ *       catch(Exception e){
+ *           noEsAmigo = true;
+ *       }
+ */   }
 
 
     public String doEnviarSolicitud() {
@@ -64,7 +64,7 @@ public class PerfilBean {
     }
     
     public boolean isSolicitudDisponible() {
-        return amigosFacade.sendPetitionAvailable(loginBean.getUserId(), usuario.getId());
+        return amigosFacade.sendPetitionAvailable(loginBean.getUserId(), usuario.getId()) || this.usuario.getId().equals(this.loginBean.getUserId());
     }
 
     public Usuario getUsuario() {

@@ -100,7 +100,7 @@
   <div class="push">
     
     <div class="user">
-        <div class="user-string"><span class="name">#{post.usuario.nombre}</span><span class="username">@#{post.usuario.nombreUsuario}</span></div>
+        <div class="user-string"><h:form><h:commandLink action="#{loginBean.doSeleccionarUsuario(post.usuario)}"><span class="name">#{post.usuario.nombre}</span><span class="username">@#{post.usuario.nombreUsuario}</span></h:commandLink></h:form></div>
     </div>
     
       <blockquote class="tweet">#{post.texto}</blockquote>

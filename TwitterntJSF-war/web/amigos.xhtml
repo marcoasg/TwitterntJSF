@@ -80,7 +80,7 @@
                     <h:dataTable value="#{amigosBean.listaSolicitudes}" var="solicitud">
                         <h:column>
                             <h:form>
-                                <h:commandLink action="#{perfilBean.cargaPerfil()}" class="btn btn-link">
+                                <h:commandLink action="#{loginBean.doSeleccionarUsuario(solicitud)}" class="btn btn-link">
                                     #{solicitud.nombre}&nbsp;#{solicitud.apellidos}
                                     <f:setPropertyActionListener value="#{solicitud}"
                                                                  target="#{perfilBean.usuario}" />

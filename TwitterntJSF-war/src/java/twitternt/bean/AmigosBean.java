@@ -14,7 +14,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import twitternt.dao.AmigosFacade;
 import twitternt.entity.Amigos;
-import twitternt.entity.AmigosPK;
 import twitternt.entity.Usuario;
 
 /**

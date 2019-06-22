@@ -45,7 +45,7 @@
           
         
         
-        <div class="container-fluid" align="right">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-4">
                     <h1>#{loginBean.usuario.nombre} #{loginBean.usuario.apellidos}</h1>
@@ -108,10 +108,8 @@
                     </h:form>
                     
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-8">
-                    <h:dataTable id="listaPost" value="#{indexBean.listaPost}" var="post">
+                <div class="col-4">
+                    <h:dataTable id="listaPost" value="#{loginBean.listaPostPropios}" var="post">
           <h:column>   
               <div class="container">
     
@@ -135,9 +133,12 @@
           </h:column>            
         </h:dataTable>
         </div>
+            </div>
+            
+                
               
         
-            </div>
+            
             
             
         </div>

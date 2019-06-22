@@ -47,4 +47,9 @@ public class PostFacade extends AbstractFacade<Post> {
         
     }
     
+    
+    public List<Post> findOwnPost(Integer user){
+       return em.createQuery("SELECT p FROM Post p WHERE p.usuario.id = :usuario").setParameter("usuario", user).getResultList();
+    }
+    
 }

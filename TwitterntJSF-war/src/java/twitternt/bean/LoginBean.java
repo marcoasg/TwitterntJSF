@@ -15,7 +15,9 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
+import twitternt.dao.PostFacade;
 import twitternt.dao.UsuarioFacade;
+import twitternt.entity.Post;
 import twitternt.entity.Usuario;
 
 /**
@@ -27,6 +29,9 @@ import twitternt.entity.Usuario;
 public class LoginBean implements Serializable {
 
     @EJB
+    private PostFacade postFacade;
+
+    @EJB
     private UsuarioFacade usuarioFacade;
     
     @Inject
@@ -34,6 +39,7 @@ public class LoginBean implements Serializable {
     
     protected Usuario usuario;
     protected String user;
+    protected String passIntroducida;
     protected String pass;
     protected String passRep;
     protected Integer userId;
@@ -41,6 +47,7 @@ public class LoginBean implements Serializable {
     protected String nombre;
     protected String apellidos;
     protected String email;
+    protected List<Post> listaPostPropios;
     
     /**
      * Creates a new instance of LoginBean
@@ -59,14 +66,14 @@ public class LoginBean implements Serializable {
         this.nombre = this.usuario.getNombre();
         this.apellidos = this.usuario.getApellidos();
         this.email = this.usuario.getEmail();
+        this.listaPostPropios = this.postFacade.findOwnPost(this.userId);
        }
     }
     
     
     public String doLogin(){
-        System.out.println(user + "," + pass);
       this.init();
-      if(this.usuario != null && this.usuario.getPassword().equals(pass)){
+      if(this.usuario != null && this.usuario.getPassword().equals(passIntroducida)){
         return "index";
       }
       return "login";
@@ -165,6 +172,33 @@ public class LoginBean implements Serializable {
     public void setPassRep(String passRep) {
         this.passRep = passRep;
     }
+
+    public List<Post> getListaPostPropios() {
+        return listaPostPropios;
+    }
+
+    public void setListaPostPropios(List<Post> listaPostPropios) {
+        this.listaPostPropios = listaPostPropios;
+    }
+
+    public PostFacade getPostFacade() {
+        return postFacade;
+    }
+
+    public void setPostFacade(PostFacade postFacade) {
+        this.postFacade = postFacade;
+    }
+
+    public String getPassIntroducida() {
+        return passIntroducida;
+    }
+
+    public void setPassIntroducida(String passIntroducida) {
+        this.passIntroducida = passIntroducida;
+    }
+    
+    
+    
     
     public String doEditar(){
         if(this.pass.equals(this.passRep)){

@@ -43,6 +43,7 @@ public class LoginBean implements Serializable {
     protected String pass;
     protected String passRep;
     protected Integer userId;
+    protected String imagen;
     
     protected String nombre;
     protected String apellidos;
@@ -67,6 +68,7 @@ public class LoginBean implements Serializable {
         this.nombre = this.usuario.getNombre();
         this.apellidos = this.usuario.getApellidos();
         this.email = this.usuario.getEmail();
+        this.imagen = this.usuario.getImagen();
         this.listaPostPropios = this.postFacade.findOwnPost(this.userId);
        }
     }
@@ -205,6 +207,14 @@ public class LoginBean implements Serializable {
     public void setPassIntroducida(String passIntroducida) {
         this.passIntroducida = passIntroducida;
     }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
     
     
     
@@ -215,6 +225,7 @@ public class LoginBean implements Serializable {
             this.usuario.setPassword(this.pass);
             this.usuario.setApellidos(this.apellidos);
             this.usuario.setEmail(this.email);
+            this.usuario.setImagen("http://drive.google.com/uc?export=view&id=" + this.imagen);
             this.usuarioFacade.edit(this.usuario);
         }else{
             this.init();

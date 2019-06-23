@@ -12,7 +12,7 @@
         <title>Perfil</title>
     </h:head>
     <h:body>
-                  <!--Menú de navegación-->
+        <!--Menú de navegación-->
         <h:form>
             <div class="card text-center" style="background-color: #5cb85c">
                 <div class="card-header">
@@ -41,112 +41,120 @@
                 </div>
             </div>
         </h:form>
-        <br/>
-          
-        
-        
+
+
+
         <div class="container-fluid">
             <div class="row">
                 <div class="col-4">
                     <h1>#{loginBean.usuario.nombre} #{loginBean.usuario.apellidos}</h1>
-                    <br/>
+                    <img height="70" width="70" src="#{loginBean.usuario.imagen}" rendered="#{loginBean.usuario.imagen != null}"></img>
+                    <br/><br/>
                     <h:form>
                         <h6>Nombre de usuario</h6>
                         <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-									<span class="input-group-text" id="basic-addon1"><i class="fas fa-user-edit"></i></span>
-								</div>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-edit"></i></span>
+                            </div>
                             <h:outputText id="user" value="#{loginBean.user}" class="form-control"/>
-                                    </div>
+                        </div>
                         <h6>Contraseña</h6>
                         <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-									<span class="input-group-text" id="basic-addon1"><i class="fas fa-user-lock"></i></span>
-								</div>
-                                        <h:inputText id="pass" value="#{loginBean.pass}" class="form-control" />
-                                    </div>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-lock"></i></span>
+                            </div>
+                            <h:inputText id="pass" value="#{loginBean.pass}" class="form-control" />
+                        </div>
                         <h6>Repetir Contraseña</h6>
                         <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-									<span class="input-group-text" id="basic-addon1"><i class="fas fa-user-lock"></i></span>
-								</div>
-                                        <h:inputText id="passRep" value="#{loginBean.passRep}" class="form-control" />
-                                    </div>
-                        
-                        
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-lock"></i></span>
+                            </div>
+                            <h:inputText id="passRep" value="#{loginBean.passRep}" class="form-control" />
+                        </div>
+
+
                         <h6>Nombre</h6>
                         <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-									<span class="input-group-text" id="basic-addon1"><i class="fas fa-clipboard-list"></i></span>
-								</div>
-                                        <h:inputText id="nombre" value="#{loginBean.nombre}" class="form-control"/>
-                                    </div>
-                        
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-clipboard-list"></i></span>
+                            </div>
+                            <h:inputText id="nombre" value="#{loginBean.nombre}" class="form-control"/>
+                        </div>
+
                         <h6>Apellidos</h6>
                         <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-									<span class="input-group-text" id="basic-addon1"><i class="fas fa-clipboard-list"></i></span>
-								</div>
-                                        <h:inputText id="apellidos" value="#{loginBean.apellidos}" class="form-control"/>
-                                    </div>
-                        
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-clipboard-list"></i></span>
+                            </div>
+                            <h:inputText id="apellidos" value="#{loginBean.apellidos}" class="form-control"/>
+                        </div>
+
                         <h6>E-mail</h6>
                         <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-									<span class="input-group-text" id="basic-addon1"><i class="fas fa-at"></i></span>
-								</div>
-                                        <h:inputText id="email" value="#{loginBean.email}" class="form-control"/> 
-                                    </div>
-                        
-                        
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-at"></i></span>
+                            </div>
+                            <h:inputText id="email" value="#{loginBean.email}" class="form-control"/> 
+                        </div>
+
+                        <h6>Foto de perfil</h6>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-at"></i></span>
+                            </div>
+                            <h:inputText id="imagen" value="#{loginBean.imagen}" class="form-control"/> 
+                        </div>
+
+
                         <h:commandButton action="#{loginBean.doEditar()}" 
-                                                 value="Editar"
-                                                 class="btn btn-success"
-                                                 style="margin-left: 15px">
+                                         value="Editar"
+                                         class="btn btn-success"
+                                         style="margin-left: 15px">
                         </h:commandButton>
-                        
+
                     </h:form>
-                    
+
                 </div>
                 <div class="col-4">
                     <h:dataTable id="listaPost" value="#{loginBean.listaPostPropios}" var="post">
-          <h:column>   
-              <div class="container">
-    
- <img src="https://i.imgur.com/sgSYItU.jpg" style="width:80px; height:80px;" alt="avatar" class="avatar"/>
-  
- <time class="tweet-time">#{post.fechaPublicacion}</time>
-  
-  <div class="push">
-    
-    <div class="user">
-        <div class="user-string"><h:form><h:commandLink action="#{loginBean.doSeleccionarUsuario(post.usuario)}"><span class="name">#{post.usuario.nombre}</span><span class="username">@#{post.usuario.nombreUsuario}</span></h:commandLink></h:form></div>
-    </div>
-    
-      <blockquote class="tweet">#{post.texto}</blockquote>
+                        <h:column>   
+                            <div class="container">
 
-   
-    
-  </div>
-  
-</div>
-          </h:column>            
-        </h:dataTable>
-        </div>
+                                <img src="#{loginBean.usuario.imagen}" style="width:80px; height:80px;" alt="avatar" class="avatar"/>
+
+                                <time class="tweet-time">#{post.fechaPublicacion}</time>
+
+                                <div class="push">
+
+                                    <div class="user">
+                                        <div class="user-string"><h:form><h:commandLink action="#{loginBean.doSeleccionarUsuario(post.usuario)}"><span class="name">#{post.usuario.nombre}</span><span class="username">@#{post.usuario.nombreUsuario}</span></h:commandLink></h:form></div>
+                                    </div>
+
+                                    <blockquote class="tweet">#{post.texto}</blockquote>
+
+
+
+                                </div>
+
+                            </div>
+                        </h:column>            
+                    </h:dataTable>
+                </div>
             </div>
-            
-                
-              
-        
-            
-            
-            
+
+
+
+
+
+
+
         </div>
-        
+
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
- 
+
     </h:body>
 </html>
 

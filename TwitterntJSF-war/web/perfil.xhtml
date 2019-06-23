@@ -41,86 +41,85 @@
             </div>
         </h:form>
 
-        
-        
-        
-        <h1>Perfil de #{perfilBean.usuario.nombre}</h1>
-          <div class="container-fluid">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-4">
                     <br/>
+                    <h1>Perfil de #{perfilBean.usuario.nombre}</h1>
+                    <img height="70" width="70" src="#{perfilBean.usuario.imagen}" rendered="#{perfilBean.usuario.imagen != null}"></img>
+
                     <h:form>
                         <h6>Nombre de usuario</h6>
                         <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-									<span class="input-group-text" id="basic-addon1"><i class="fas fa-user-edit"></i></span>
-								</div>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-edit"></i></span>
+                            </div>
                             <h:outputText id="user" value="#{perfilBean.usuario.nombreUsuario}" class="form-control" />
-                                    </div>
+                        </div>
 
-                        
+
                         <h6>Nombre</h6>
                         <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-									<span class="input-group-text" id="basic-addon1"><i class="fas fa-clipboard-list"></i></span>
-								</div>
-                                        <h:outputText id="nombre" value="#{perfilBean.usuario.nombre}" class="form-control"/>
-                                    </div>
-                        
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-clipboard-list"></i></span>
+                            </div>
+                            <h:outputText id="nombre" value="#{perfilBean.usuario.nombre}" class="form-control"/>
+                        </div>
+
                         <h6>Apellidos</h6>
                         <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-									<span class="input-group-text" id="basic-addon1"><i class="fas fa-clipboard-list"></i></span>
-								</div>
-                                        <h:outputText id="apellidos" value="#{perfilBean.usuario.apellidos}" class="form-control"/>
-                                    </div>
-                        
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-clipboard-list"></i></span>
+                            </div>
+                            <h:outputText id="apellidos" value="#{perfilBean.usuario.apellidos}" class="form-control"/>
+                        </div>
+
                         <h6>E-mail</h6>
                         <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-									<span class="input-group-text" id="basic-addon1"><i class="fas fa-at"></i></span>
-								</div>
-                                        <h:outputText id="email" value="#{perfilBean.usuario.email}" class="form-control"/> 
-                                    </div>
-                        
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-at"></i></span>
+                            </div>
+                            <h:outputText id="email" value="#{perfilBean.usuario.email}" class="form-control"/> 
+                        </div>
+
                         <h:commandButton value="Enviar solicitud de amistad" rendered="#{perfilBean.solicitudDisponible}" action="#{perfilBean.doEnviarSolicitud()}"/>
                     </h:form>                 
                 </div>
-                
-                
+
+
                 <div class="col-4">
                     <h:dataTable id="listaPost" value="#{perfilBean.usuario.postList}" var="post">
-          <h:column>   
-              <div class="container">
-    
- <img src="https://i.imgur.com/sgSYItU.jpg" style="width:80px; height:80px;" alt="avatar" class="avatar"/>
-  
- <time class="tweet-time">#{post.fechaPublicacion}</time>
-  
-  <div class="push">
-    
-    <div class="user">
-        <div class="user-string"><h:form><h:commandLink action="#{loginBean.doSeleccionarUsuario(post.usuario)}"><span class="name">#{post.usuario.nombre}</span><span class="username">@#{post.usuario.nombreUsuario}</span></h:commandLink></h:form></div>
-    </div>
-    
-      <blockquote class="tweet">#{post.texto}</blockquote>
+                        <h:column>   
+                            <div class="container">
 
-   
-    
-  </div>
-  
-</div>
-          </h:column>            
-        </h:dataTable>
-        </div>
+                                <img src="#{perfilBean.usuario.imagen}" style="width:80px; height:80px;" alt="avatar" class="avatar"/>
+
+                                <time class="tweet-time">#{post.fechaPublicacion}</time>
+
+                                <div class="push">
+
+                                    <div class="user">
+                                        <div class="user-string"><h:form><h:commandLink action="#{loginBean.doSeleccionarUsuario(post.usuario)}"><span class="name">#{post.usuario.nombre}</span><span class="username">@#{post.usuario.nombreUsuario}</span></h:commandLink></h:form></div>
+                                    </div>
+
+                                    <blockquote class="tweet">#{post.texto}</blockquote>
+
+
+
+                                </div>
+
+                            </div>
+                        </h:column>            
+                    </h:dataTable>
+                </div>
             </div>
-            
-                
-              
-        
-            
-            
-            
+
+
+
+
+
+
+
         </div>
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

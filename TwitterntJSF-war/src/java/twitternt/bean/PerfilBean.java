@@ -50,7 +50,7 @@ public class PerfilBean {
 
 
     public String doEnviarSolicitud() {
-        Amigos solicitud = new Amigos();
+        Amigos solicitud = new Amigos(new AmigosPK(loginBean.getUserId(), usuario.getId()));
         solicitud.setUsuario(loginBean.getUsuario());
         solicitud.setUsuario1(usuario);
         solicitud.setSolicitudAceptada(false);

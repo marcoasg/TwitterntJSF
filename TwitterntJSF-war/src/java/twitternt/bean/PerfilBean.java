@@ -55,9 +55,6 @@ public class PerfilBean {
         solicitud.setUsuario1(usuario);
         solicitud.setSolicitudAceptada(false);
 
-        AmigosPK pk = new AmigosPK(loginBean.getUserId(), usuario.getId());
-        solicitud.setAmigosPK(pk);
-
         amigosFacade.create(solicitud);
         this.init();
         return null;

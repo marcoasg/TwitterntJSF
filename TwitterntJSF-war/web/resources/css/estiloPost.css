@@ -44,7 +44,6 @@ html {
   width: 660px;
   background-color: white;
   margin-left: 200px;
-  cursor: pointer;
   transition: all .4s;
   &:hover {
     border: 2px solid hsla(194, 85%, 56%, 1);

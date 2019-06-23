@@ -223,6 +223,8 @@ public class LoginBean implements Serializable {
     }
     public String doSeleccionarUsuario(Usuario u){
         usuarioSeleccionado = u;
+        if (usuarioSeleccionado.equals(usuario))
+            return "perfilPropio.jsf";
         return "perfil.jsf";
     }
 }

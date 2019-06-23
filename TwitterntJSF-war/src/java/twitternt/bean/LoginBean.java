@@ -185,6 +185,7 @@ public class LoginBean implements Serializable {
     }
 
     public List<Post> getListaPostPropios() {
+        this.init();
         return listaPostPropios;
     }
 
@@ -225,12 +226,13 @@ public class LoginBean implements Serializable {
             this.usuario.setPassword(this.pass);
             this.usuario.setApellidos(this.apellidos);
             this.usuario.setEmail(this.email);
-            this.usuario.setImagen("http://drive.google.com/uc?export=view&id=" + this.imagen);
+           // this.usuario.setImagen("http://drive.google.com/uc?export=view&id=" + this.imagen);
             this.usuarioFacade.edit(this.usuario);
+            this.init();
         }else{
             this.init();
         }
-        return "";
+        return "perfilPropio.jsf";
     }
     public String doSeleccionarUsuario(Usuario u){
         usuarioSeleccionado = u;

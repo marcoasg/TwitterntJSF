@@ -13,7 +13,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import twitternt.dao.PostFacade;
 import twitternt.dao.UsuarioFacade;
@@ -33,79 +32,66 @@ public class LoginBean implements Serializable {
 
     @EJB
     private UsuarioFacade usuarioFacade;
-    
-    @Inject
-    protected UsuarioBean usuarioBean;
-    
-    protected Usuario usuario;
-    protected String user;
-    protected String passIntroducida;
-    protected String pass;
-    protected String passRep;
-    protected Integer userId;
-    protected String imagen;
-    
-    protected String nombre;
-    protected String apellidos;
-    protected String email;
-    protected List<Post> listaPostPropios;
-    protected Usuario usuarioSeleccionado;
-    
+
+    private Usuario usuario;
+    private String user;
+    private String passIntroducida;
+    private String pass;
+    private String passRep;
+    private Integer userId;
+    private String imagen;
+
+    private String nombre;
+    private String apellidos;
+    private String email;
+    private List<Post> listaPostPropios;
+    private Usuario usuarioSeleccionado;
+
     /**
      * Creates a new instance of LoginBean
      */
     public LoginBean() {
     }
-    
+
     @PostConstruct
-    public void init(){
-       this.usuario = this.usuarioFacade.findByUserName(this.user);
-       if(this.usuario != null){
-        this.userId = this.usuario.getId();
-        this.user = this.usuario.getNombreUsuario();
-        this.pass = this.usuario.getPassword();
-        this.passRep = this.pass;
-        this.nombre = this.usuario.getNombre();
-        this.apellidos = this.usuario.getApellidos();
-        this.email = this.usuario.getEmail();
-        this.imagen = this.usuario.getImagen();
-        this.listaPostPropios = this.postFacade.findOwnPost(this.userId);
-       }
-    }
-    
-    
-    public String doLogin(){
-      this.init();
-      if(this.usuario != null && this.usuario.getPassword().equals(passIntroducida)){
-        return "index";
-      }
-      return "login";
+    public void init() {
+        this.usuario = this.usuarioFacade.findByUserName(this.user);
+        if (this.usuario != null) {
+            this.userId = this.usuario.getId();
+            this.user = this.usuario.getNombreUsuario();
+            this.pass = this.usuario.getPassword();
+            this.passRep = this.pass;
+            this.nombre = this.usuario.getNombre();
+            this.apellidos = this.usuario.getApellidos();
+            this.email = this.usuario.getEmail();
+            this.imagen = this.usuario.getImagen();
+            this.listaPostPropios = this.postFacade.findOwnPost(this.userId);
+        }
     }
 
-    
+    public String doLogin() {
+        this.init();
+        if (this.usuario != null && this.usuario.getPassword().equals(passIntroducida)) {
+            return "index.jsf";
+        }
+        return "login.jsf";
+    }
+
     public String logout() {
         FacesContext context = FacesContext.getCurrentInstance();
         ExternalContext externalContext = context.getExternalContext();
         Object session = externalContext.getSession(false);
         HttpSession httpSession = (HttpSession) session;
         httpSession.invalidate();
-        return "login";
+        return "login.jsf";
     }
-    
+
     public UsuarioFacade getUsuarioFacade() {
         return usuarioFacade;
     }
 
     public void setUsuarioFacade(UsuarioFacade usuarioFacade) {
         this.usuarioFacade = usuarioFacade;
-    }
-
-    public UsuarioBean getUsuarioBean() {
-        return usuarioBean;
-    }
-
-    public void setUsuarioBean(UsuarioBean usuarioBean) {
-        this.usuarioBean = usuarioBean;
     }
 
     public String getUser() {
@@ -123,8 +109,6 @@ public class LoginBean implements Serializable {
     public void setPass(String pass) {
         this.pass = pass;
     }
-    
-    
 
     public Usuario getUsuario() {
         return usuario;
@@ -133,8 +117,6 @@ public class LoginBean implements Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
-   
 
     public Integer getUserId() {
         return this.userId;
@@ -185,7 +167,7 @@ public class LoginBean implements Serializable {
     }
 
     public List<Post> getListaPostPropios() {
-        this.init();
+        //this.init();
         return listaPostPropios;
     }
 
@@ -209,6 +191,33 @@ public class LoginBean implements Serializable {
         this.passIntroducida = passIntroducida;
     }
 
+    public String doEditar() {
+        if (this.pass.equals(this.passRep)) {
+            this.usuario.setNombre(this.nombre);
+            this.usuario.setPassword(this.pass);
+            this.usuario.setApellidos(this.apellidos);
+            this.usuario.setEmail(this.email);
+            this.usuario.setImagen(this.imagen);
+            this.usuarioFacade.edit(this.usuario);
+            this.init();
+        } else {
+            this.init();
+        }
+        return null;
+    }
+
+    public String doSeleccionarUsuario(Usuario u) {
+        usuarioSeleccionado = u;
+        if (usuarioSeleccionado.equals(usuario)) {
+            return "perfilPropio.jsf";
+        }
+        return "perfil.jsf";
+    }
+
+    public String getImagenFormateada(){
+        return "http://drive.google.com/uc?export=view&id=" + this.imagen;
+    }
+    
     public String getImagen() {
         return imagen;
     }
@@ -216,29 +225,4 @@ public class LoginBean implements Serializable {
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
-    
-    
-    
-    
-    public String doEditar(){
-        if(this.pass.equals(this.passRep)){
-            this.usuario.setNombre(this.nombre);
-            this.usuario.setPassword(this.pass);
-            this.usuario.setApellidos(this.apellidos);
-            this.usuario.setEmail(this.email);
-           // this.usuario.setImagen("http://drive.google.com/uc?export=view&id=" + this.imagen);
-            this.usuarioFacade.edit(this.usuario);
-            this.init();
-        }else{
-            this.init();
-        }
-        return "perfilPropio.jsf";
-    }
-    public String doSeleccionarUsuario(Usuario u){
-        usuarioSeleccionado = u;
-        if (usuarioSeleccionado.equals(usuario))
-            return "perfilPropio.jsf";
-        return "perfil.jsf";
-    }
 }
-

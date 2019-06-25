@@ -222,5 +222,5 @@ public class Usuario implements Serializable {
     public String toString() {
         return "twitternt.entity.Usuario[ id=" + id + " ]";
     }
-    
+
 }

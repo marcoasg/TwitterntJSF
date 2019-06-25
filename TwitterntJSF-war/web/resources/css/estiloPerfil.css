@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+:root{
+  --black: black;
+  --white: #fff;
+  --grey: hsl(214, 7%, 47%);
+  --light-grey: #eee;
+  --twitter-blue: #0084b4;
+  --font-large: 20px;
+  --font-small: 14px;
+}
+
+
+
+.twitter-card{
+  width: 450px;
+  height: 250px;
+  border: 1px solid var(--light-grey);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  margin-left: 5em;
+  background: var(--white);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.row-top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+  margin-left: 1rem
+}
+
+.user-image{
+  
+  background-position: center;
+  background-size: cover;
+  height: 70px; 
+  width: 70px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.profile-user > * {
+  display: block;
+}
+
+.user-wrapper{
+  display: flex;
+  align-items: center; 
+}
+
+.follow{
+  padding: 10px 30px;
+  border: 1px solid var(--twitter-blue);
+  border-radius: 30px;
+  color: var(--twitter-blue);
+  font-weight:bold;
+  transition: all .2s ease-out;
+}
+
+.follow:hover{
+  background-color: var(--twitter-blue);
+  color: var(--white);
+}
+
+.user{
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.username{
+  font-size: 15px;
+  color: var(--grey);
+}
+
+.profile-bio{
+  width: 90%;
+  margin-bottom: 1rem;
+}
+
+.row-middle{
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+
+
+
+.row-bottom{
+  border-top: 1px solid #ccc;
+  padding-top: 1rem;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.row-bottom > *:first-child {
+  padding-left: 4rem;
+}
+
+.row-bottom > *:not(:first-child) {
+  padding-left: 10rem;
+}
+
+.followers-count, .following-count, .likes-count{
+  color: var(--grey);
+  font-size: 17px
+}
+
+.count-meta{
+  display: block;
+  font-size: 27px;
+  font-weight: bold;
+  margin-top: 5px;
+  color: var(--black);
+}

@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous"/>
         <link rel="stylesheet" href="resources/css/estiloBase.css"></link>
         <link rel="stylesheet" href="resources/css/estiloPost.css"></link>
+        <link rel="stylesheet" href="resources/css/estiloPerfil.css"></link>
         <title>Perfil</title>
     </h:head>
     <h:body>
@@ -47,10 +48,40 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-4">
-                    <h1>#{loginBean.nombre} #{loginBean.apellidos}</h1>
-                    <img height="70" width="70" alt="Imagen de perfil" src="#{loginBean.imagenFormateada}" rendered="#{loginBean.imagen != null}"></img>
+                    
+  <br/>                  
+<div class="twitter-card">
+  <div class="row-top">
+    <div class="user-wrapper">
+       <img class="user-image"  height="70" width="70" alt="Imagen de perfil" src="#{loginBean.imagenFormateada}" rendered="#{loginBean.imagen != null}"></img>
+       <div class="profile-user">
+           <span class="user">#{loginBean.nombre} &nbsp; #{loginBean.apellidos}</span>
+           <span class="username">@#{loginBean.user}</span>
+       </div>
+    </div>
+
+  </div>
+  
+  <div class="row-middle">
+
+  </div>
+  <div class="row-bottom">
+    <span class="followers-count">
+      Posts
+      <span class="count-meta">#{loginBean.listaPostPropios.size()}</span>
+    </span>
+    <span class="following-count">
+      Amigos
+      <span class="count-meta">#{loginBean.usuario.amigosList.size()}</span>
+      
+    </span>
+
+  </div>
+</div>         
+                    
+                   
                     <br/><br/>
-                    <h:form>
+                    <h:form style="margin-left: 5em;">
                         <h6>Nombre de usuario</h6>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
@@ -115,6 +146,7 @@
 
                 </div>
                 <div class="col-4">
+                    <br/>
                     <h:dataTable id="listaPost" value="#{loginBean.listaPostPropios}" var="post">
                         <h:column>   
                             <div class="container">

@@ -40,6 +40,8 @@ public class GruposBean implements Serializable {
     @Inject
     private LoginBean loginBean;
     
+    private Usuario usuario;
+    
     private List<Grupo> gruposAdmin;
     
     private List<GrupoUsuarios> grupos;
@@ -47,24 +49,63 @@ public class GruposBean implements Serializable {
     private Grupo grupoAdminSeleccionado;
     
     private GrupoUsuarios grupoSeleccionado;
+    
+    private String nombre;
+    
+    private String descripcion;
+    
+    private Short solicitudAceptada;
+ 
 
     public GruposBean() {
     }
     
      @PostConstruct
     public void init(){
-            Usuario u = usuarioFacade.findById((Integer) loginBean.getUserId());
-            grupos = u.getGrupoUsuariosList();
-            gruposAdmin = u.getGrupoList();
+            usuario = usuarioFacade.findById(loginBean.getUserId());
+            grupos = grupoUsuariosFacade.findByUser(usuario);
+            gruposAdmin = grupoFacade.findByAdmin(usuario);
     }
     
     public String doEliminar(){
-        if(grupoAdminSeleccionado != null)
-            this.grupoFacade.remove(grupoAdminSeleccionado);
-        else
+        this.grupoFacade.remove(grupoAdminSeleccionado);
+        init();
+        return null;
+    }
+    
+    public String doSalir(){
+        if(grupoSeleccionado.getGrupo1().getAdmin().equals(usuario)){
+            grupoAdminSeleccionado = grupoSeleccionado.getGrupo1();
+            return doEliminar();
+        }else{
             this.grupoUsuariosFacade.remove(grupoSeleccionado);
-        
-        return "grupos";
+            init();
+            return null;
+        }
+    }
+    
+      public String doCrearGrupo(){
+        if(!this.nombre.equals("") && !this.descripcion.equals("")){
+            
+            Grupo grupoAdmin = new Grupo();
+            grupoAdmin.setId(0);
+            grupoAdmin.setNombre(nombre);
+            grupoAdmin.setDescripcion(descripcion);
+            grupoAdmin.setAdmin(usuario);
+            grupoFacade.create(grupoAdmin);
+            
+            GrupoUsuarios grupo = new GrupoUsuarios(grupoAdmin.getId(), usuario.getId());
+            grupo.setGrupo1(grupoAdmin);
+            grupo.setUsuario1(usuario);
+            solicitudAceptada = 1;
+            grupo.setSolicitudAceptada(solicitudAceptada);
+            grupoUsuariosFacade.create(grupo);
+            
+            init();
+            return "grupos";
+        }else{
+            return "crearGrupo";
+        }
     }
     
     public List<Grupo> getGruposAdmin() {
@@ -97,6 +138,30 @@ public class GruposBean implements Serializable {
 
     public void setGrupoSeleccionado(GrupoUsuarios grupoSeleccionado) {
         this.grupoSeleccionado = grupoSeleccionado;
+    }
+    
+        public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Short getSolicitudAceptada() {
+        return solicitudAceptada;
+    }
+
+    public void setSolicitudAceptada(Short solicitudAceptada) {
+        this.solicitudAceptada = solicitudAceptada;
     }
  
 }

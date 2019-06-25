@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import twitternt.entity.Grupo;
+import twitternt.entity.Usuario;
 
 /**
  *
@@ -35,6 +36,10 @@ public class GrupoFacade extends AbstractFacade<Grupo> {
 
     public List<Grupo> findLikeName(String n) {
         return (List<Grupo>) this.em.createQuery("SELECT g FROM Grupo g WHERE g.nombre LIKE '%"+n+"%' OR g.nombre LIKE '%"+n+"%'").getResultList();
+    }
+
+    public List<Grupo> findByAdmin(Usuario usuario) {
+        return (List<Grupo>) this.em.createQuery("SELECT g FROM Grupo g WHERE g.admin = :u").setParameter("u", usuario).getResultList();
     }
     
 }

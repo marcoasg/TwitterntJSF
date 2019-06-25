@@ -49,19 +49,17 @@
             <h:form>
                 <div class="col-4">
                     <h1>Nombre del Grupo</h1>
-                     <h:inputText id="user" value="" class="form-control" />
+                     <h:inputText id="nombre" value="#{gruposBean.nombre}" class="form-control" />
                 </div>
                 <div class="col-4">
                     <h1>Descripci&oacute;n del Grupo</h1>
-
+                    <h:inputText id="descripcion" value="#{gruposBean.descripcion}" class="form-control" />
                 </div>
 
                  <div class="col-3">
 
-                     <h:commandButton action="#{gruposBean.doCrear()}" 
+                     <h:commandButton action="#{gruposBean.doCrearGrupo()}" 
                                              value="Crear Gupo" class="btn btn-success">
-                                             <f:setPropertyActionListener value="#{grupo}"
-                                                                          target="#{gruposBean.grupoAdminSeleccionado}" />
                       </h:commandButton>
                  </div>
              </h:form>

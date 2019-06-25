@@ -55,7 +55,7 @@
                         <h:column></h:column>
                         <h:column>
                             <h:form>
-                                <h:commandButton action="#{gruposBean.doEliminar()}" 
+                                <h:commandButton action="#{gruposBean.doSalir()}" 
                                                  value="Salir" class="btn btn-success"
                                                  style="margin-left: 15px">
                                     <f:setPropertyActionListener value="#{grupo}"
@@ -75,16 +75,7 @@
                             #{grupoAdmin.nombre}
                         </h:column>
                         <h:column></h:column>
-                        <h:column>
-                            <h:form>
-                                <h:commandButton action="#{gruposBean.doEliminar()}" 
-                                                 value="Eliminar" class="btn btn-success"
-                                                 style="margin-left: 15px">
-                                    <f:setPropertyActionListener value="#{grupo}"
-                                                                 target="#{gruposBean.grupoAdminSeleccionado}" />
-                                </h:commandButton>
-                            </h:form>
-                        </h:column>
+                        
                     </h:dataTable>
                 </div>
                 <!--Búsqueda de Grupos-->

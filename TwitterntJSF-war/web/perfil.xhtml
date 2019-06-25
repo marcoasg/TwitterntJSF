@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous"/>
         <link rel="stylesheet" href="resources/css/estiloBase.css"></link>
         <link rel="stylesheet" href="resources/css/estiloPost.css"></link>
+        <link rel="stylesheet" href="resources/css/estiloPerfil.css"></link>
         <title>Perfil: @#{perfilBean.usuario.nombreUsuario}</title>
     </h:head>
     <h:body>
@@ -44,46 +45,41 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-4">
-                    <br/>
-                    <h1>Perfil de #{perfilBean.usuario.nombre}</h1>
-                    <img height="70" width="70" src="#{perfilBean.usuario.imagen}" rendered="#{perfilBean.usuario.imagen != null}"></img>
+                    
+                    
+                    
+                      <br/>                  
+<div class="twitter-card" style="  position: fixed;">
+  <div class="row-top">
+    <div class="user-wrapper">
+        <img class="user-image"  alt="Imagen de perfil" src="#{perfilBean.usuario.getImagenFormateada()}" rendered="#{perfilBean.usuario.imagen != null}"></img>
+       <div class="profile-user">
+           <span class="user">#{perfilBean.usuario.nombre} &nbsp; #{perfilBean.usuario.apellidos}</span>
+           <span class="username">@#{perfilBean.usuario.nombreUsuario}</span>
+       </div>
+    </div>
+      <h:form><h:commandButton class="follow" value="Agregar" rendered="#{perfilBean.solicitudDisponible}" action="#{perfilBean.doEnviarSolicitud()}"/></h:form>
+  </div>
+  
+  <div class="row-middle">
 
-                    <h:form>
-                        <h6>Nombre de usuario</h6>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-edit"></i></span>
-                            </div>
-                            <h:outputText id="user" value="#{perfilBean.usuario.nombreUsuario}" class="form-control" />
-                        </div>
+  </div>
+  <div class="row-bottom">
+    <span class="followers-count">
+      Posts
+      <span class="count-meta">#{perfilBean.usuario.postList.size()}</span>
+    </span>
+    <span class="following-count">
+      Amigos
+      <span class="count-meta">#{perfilBean.usuario.amigosList.size()}</span>
+      
+    </span>
 
+  </div>
+</div>      
+                    
 
-                        <h6>Nombre</h6>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-clipboard-list"></i></span>
-                            </div>
-                            <h:outputText id="nombre" value="#{perfilBean.usuario.nombre}" class="form-control"/>
-                        </div>
-
-                        <h6>Apellidos</h6>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-clipboard-list"></i></span>
-                            </div>
-                            <h:outputText id="apellidos" value="#{perfilBean.usuario.apellidos}" class="form-control"/>
-                        </div>
-
-                        <h6>E-mail</h6>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-at"></i></span>
-                            </div>
-                            <h:outputText id="email" value="#{perfilBean.usuario.email}" class="form-control"/> 
-                        </div>
-
-                        <h:commandButton value="Enviar solicitud de amistad" rendered="#{perfilBean.solicitudDisponible}" action="#{perfilBean.doEnviarSolicitud()}"/>
-                    </h:form>                 
+                                    
                 </div>
 
 
@@ -92,9 +88,9 @@
                         <h:column>   
                             <div class="container">
 
-                                <img src="#{perfilBean.usuario.imagen}" style="width:80px; height:80px;" alt="avatar" class="avatar"/>
+                                <img src="#{perfilBean.usuario.getImagenFormateada()}" style="width:80px; height:80px;" alt="avatar" class="avatar"/>
 
-                                <time class="tweet-time">#{post.fechaPublicacion}</time>
+                                <time class="tweet-time">#{post.fechaPublicacion.date}/#{post.fechaPublicacion.month + 1}/#{post.fechaPublicacion.year + 1900} &nbsp; &nbsp; #{indexBean.horaminuto(post.fechaPublicacion.hours)}:#{indexBean.horaminuto(post.fechaPublicacion.minutes)}</time>
 
                                 <div class="push">
 

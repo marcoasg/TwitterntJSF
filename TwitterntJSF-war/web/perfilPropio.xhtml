@@ -53,7 +53,7 @@
 <div class="twitter-card">
   <div class="row-top">
     <div class="user-wrapper">
-       <img class="user-image"  height="70" width="70" alt="Imagen de perfil" src="#{loginBean.imagenFormateada}" rendered="#{loginBean.imagen != null}"></img>
+       <img class="user-image"  alt="Imagen de perfil" src="#{loginBean.imagenFormateada}" rendered="#{loginBean.imagen != null}"></img>
        <div class="profile-user">
            <span class="user">#{loginBean.nombre} &nbsp; #{loginBean.apellidos}</span>
            <span class="username">@#{loginBean.user}</span>
@@ -153,7 +153,7 @@
 
                                 <img src="#{loginBean.imagenFormateada}" style="width:80px; height:80px;" alt="avatar" class="avatar"/>
 
-                                <time class="tweet-time">#{post.fechaPublicacion}</time>
+                                <time class="tweet-time">#{post.fechaPublicacion.date}/#{post.fechaPublicacion.month + 1}/#{post.fechaPublicacion.year + 1900} &nbsp; &nbsp; #{indexBean.horaminuto(post.fechaPublicacion.hours)}:#{indexBean.horaminuto(post.fechaPublicacion.minutes)}</time>
 
                                 <div class="push">
 

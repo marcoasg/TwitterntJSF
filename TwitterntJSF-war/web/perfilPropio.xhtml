@@ -94,14 +94,14 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon11"><i class="fas fa-user-lock"></i></span>
                             </div>
-                            <h:inputText id="pass" value="#{loginBean.pass}" class="form-control" />
+                            <h:inputSecret  id="pass" value="#{loginBean.pass}" class="form-control" />
                         </div>
                         <h6>Repetir Contraseña</h6>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon111"><i class="fas fa-user-lock"></i></span>
                             </div>
-                            <h:inputText id="passRep" value="#{loginBean.passRep}" class="form-control" />
+                            <h:inputSecret id="passRep" value="#{loginBean.passRep}" class="form-control" />
                         </div>
 
 
@@ -163,6 +163,9 @@
 
                                     <blockquote class="tweet">#{post.texto}</blockquote>
 
+                                    <h:panelGroup rendered="#{post.tieneImagen()}">
+                                    <img src="#{post.getImagenFormateada()}" style="max-width:500px; max-height:400px;" />
+                                    </h:panelGroup>
 
 
                                 </div>

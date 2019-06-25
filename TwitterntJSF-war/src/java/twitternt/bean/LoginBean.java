@@ -192,18 +192,22 @@ public class LoginBean implements Serializable {
     }
 
     public String doEditar() {
-        if (this.pass.equals(this.passRep)) {
+        if (this.passRep != null && this.pass != null){
+        if (this.pass.equals(this.passRep) ){
+            if (!(this.pass.equals("") && this.passRep.equals(""))){
+              this.usuario.setPassword(this.pass);
+            }
             this.usuario.setNombre(this.nombre);
-            this.usuario.setPassword(this.pass);
             this.usuario.setApellidos(this.apellidos);
             this.usuario.setEmail(this.email);
             this.usuario.setImagen(this.imagen);
             this.usuarioFacade.edit(this.usuario);
             this.init();
+        }
         } else {
             this.init();
         }
-        return null;
+        return "";
     }
 
     public String doSeleccionarUsuario(Usuario u) {

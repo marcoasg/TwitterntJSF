@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:t="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:t="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <h:head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
@@ -59,13 +60,24 @@
 
                 <div class="col-8">
 
-                              <div class="container">
+                              <div class="container2">
           <h:form>
-              <h:inputTextarea  rows="3" style="resize: none" cols="60" value="#{indexBean.post.texto}" t:placeholder="Que est&aacute; pasando..."/> &nbsp; &nbsp; &nbsp;
-              <h:commandButton action="#{indexBean.doPost()}" value="Publicar" class="btn btn-success" style="height: 75px" />
-              <h:inputText value="#{indexBean.post.imagen}" size="58" t:placeholder="Url de la imagen" />
+              <div class="row">
+              <div class="col-sm-10">
+              <h:inputTextarea class="form-control"  rows="3" style="resize: none"  value="#{indexBean.post.texto}" t:placeholder="Que est&aacute; pasando..."/> 
+              </div>
+              <div class="col-sm-2">
+                  <h:commandButton  action="#{indexBean.doPost()}" value="Publicar" class="btn btn-success" style="height: 80px;" />
+              </div>
+
+              </div>
+                            
+              <h:inputText class="form-control" value="#{indexBean.post.imagen}" size="58" t:placeholder="Url de la imagen" />
               
               
+             
+             
+                    
           </h:form>
       </div>
                     
@@ -86,8 +98,12 @@
                                     </div>
 
                                     <blockquote class="tweet">#{post.texto}</blockquote>
+                                    
+                                    <h:panelGroup rendered="#{post.tieneImagen()}">
+                                    <img src="#{post.getImagenFormateada()}" style="max-width:500px; max-height:400px;" />
+                                    </h:panelGroup>
 
-
+                                    
 
                                 </div>
 

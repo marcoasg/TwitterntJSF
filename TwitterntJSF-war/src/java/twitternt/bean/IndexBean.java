@@ -36,7 +36,7 @@ public class IndexBean {
             
         protected Usuario usuario;
         private List<Post> listaPost;
-        private Post post = new Post();
+        private Post post;
         
 
     public Usuario getUsuario() {
@@ -67,6 +67,7 @@ public class IndexBean {
         public void init(){
             usuario = loginBean.getUsuario();
             listaPost = postFacade.findByVisibilidad(0);
+            post = new Post();
         }
         
     public IndexBean() {
@@ -77,6 +78,7 @@ public class IndexBean {
         post.setUsuario(usuario);
         post.setVisibilidad(0);
         usuario.getPostList().add(post);
+        loginBean.getListaPostPropios().add(post);
         postFacade.create(post);
         usuarioFacade.edit(usuario);
         this.init();

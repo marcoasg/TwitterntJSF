@@ -139,7 +139,16 @@ public class Post implements Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
+    public String getImagenFormateada(){
+        return "http://drive.google.com/uc?export=view&id=" + this.imagen;
+    }
+    public Boolean tieneImagen(){
+        if(this.imagen != null){
+            return !(this.imagen.equals(""));
+        } else {
+            return false;
+        }
+    }
     @Override
     public int hashCode() {
         int hash = 0;

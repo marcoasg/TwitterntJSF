@@ -49,6 +49,30 @@ html {
     border: 2px solid hsla(194, 85%, 56%, 1);
   }
 }
+.container2 {
+  position: relative;
+  border: 2px solid hsla(0, 0%, 73%, 1);
+  padding: 10px 10px 10px;
+  width: 660px;
+  background-color: #5cb85c;
+  margin-left: 200px;
+  transition: all .4s;
+  &:hover {
+    border: 2px solid hsla(194, 85%, 56%, 1);
+  }
+}
+
+.publicar{
+      float: right;
+  position: relative;
+  right: 27px;
+  @include size(20px);
+  border-radius: 100px;
+  transition: all .4s;
+  &:hover {
+    border-radius: 0px;
+  }
+}
 
 .avatar {
   float: left;

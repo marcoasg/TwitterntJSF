@@ -100,7 +100,9 @@
 
                                     <blockquote class="tweet">#{post.texto}</blockquote>
 
-
+                                     <h:panelGroup rendered="#{post.tieneImagen()}">
+                                    <img src="#{post.getImagenFormateada()}" style="max-width:500px; max-height:400px;" />
+                                    </h:panelGroup>
 
                                 </div>
 

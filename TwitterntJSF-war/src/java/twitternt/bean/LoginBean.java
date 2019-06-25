@@ -215,7 +215,7 @@ public class LoginBean implements Serializable {
     }
 
     public String getImagenFormateada(){
-        return "http://drive.google.com/uc?export=view&id=" + this.imagen;
+        return this.usuario.getImagenFormateada();
     }
     
     public String getImagen() {

@@ -148,6 +148,11 @@ public class Usuario implements Serializable {
     public String getImagen() {
         return imagen;
     }
+    
+    
+    public String getImagenFormateada(){
+        return "http://drive.google.com/uc?export=view&id=" + this.imagen;
+    }
 
     public void setImagen(String imagen) {
         this.imagen = imagen;

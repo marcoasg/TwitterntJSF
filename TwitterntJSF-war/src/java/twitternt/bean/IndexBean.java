@@ -77,19 +77,12 @@ public class IndexBean {
         post.setFechaPublicacion(new Date());
         post.setUsuario(usuario);
         post.setVisibilidad(0);
-        usuario.getPostList().add(post);
         loginBean.getListaPostPropios().add(post);
         postFacade.create(post);
         usuarioFacade.edit(usuario);
         this.init();
         return "index.jsf";
     }
-    public String horaminuto(Integer i){
-        
-        if (i<10){
-            return ("0" + i.toString());
-        } else {
-            return i.toString();
-        }
-    }
+
+    
 }

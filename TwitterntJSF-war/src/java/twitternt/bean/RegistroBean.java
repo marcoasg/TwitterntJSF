@@ -115,6 +115,7 @@ public class RegistroBean {
                 this.usuario.setPassword(this.pass);
                 this.usuario.setNombre(this.nombre);
                 this.usuario.setApellidos(this.apellidos);
+                this.usuario.setImagen("1_Yn9aAJ8nNju1HZEuzWgA07u94EQWXVh");
                  this.usuario.setEmail(this.email);
                 this.usuarioFacade.create(this.usuario);
                  return "login";

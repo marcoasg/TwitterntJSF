@@ -48,5 +48,8 @@ public class GrupoUsuariosFacade extends AbstractFacade<GrupoUsuarios> {
     public GrupoUsuarios findGrupo(Usuario usuario, Grupo grupo){
         return (GrupoUsuarios) this.em.createQuery("SELECT  g FROM GrupoUsuarios g WHERE g.usuario1 = :u and g.grupo1 = :g").setParameter("u", usuario).setParameter("g", grupo).getSingleResult();
     }
-    
+
+    public List<Usuario> findUsuarios(Grupo grupo) {
+       return (List<Usuario>) this.em.createQuery("SELECT g.usuario1 FROM GrupoUsuarios g WHERE g.grupo1 = :g").setParameter("g", grupo).getResultList();
+    }
 }

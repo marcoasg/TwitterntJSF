@@ -44,7 +44,7 @@
         <!--Página de Administrar grupo-->
         <div class="container-fluid">
             <div class="row">
-                <div class="col-6">
+                <div class="col-5">
                     <h1>Usuarios del Grupo</h1>
                     <h:dataTable value="#{grupoBean.usuarios}" var="usuario">
                         <h:column>
@@ -69,11 +69,9 @@
                         </h:column>
                     </h:dataTable>
                     <br/>
-                    <h:form>
-                        <h:commandButton style="margin-top: 10px" action="grupo" value="Volver" class="btn btn-success"></h:commandButton>
-                    </h:form>
+                    
                 </div>
-                <div class="col-6">
+                <div class="col-5">
                     <h1>Lista de amigos</h1>
                        <h:dataTable value="#{grupoBean.listaAmigos}" var="amigo">
                         <h:column>
@@ -91,7 +89,7 @@
                         <h:column>
                             <h:form>
                                 <h:commandButton action="#{grupoBean.doInvitar()}" 
-                                                 value="Invitar"
+                                                 value="Invitar al grupo"
                                                  class="btn btn-success"
                                                  style="margin-left: 15px">
                                     <f:setPropertyActionListener value="#{amigo}"
@@ -101,10 +99,20 @@
                         </h:column>
                        </h:dataTable>
                     <br/>
-                    <h:form>
-                        <h:commandButton style="margin-top: 10px" action="#{grupoBean.doEliminar()}" value="Eliminar Grupo" class="btn btn-danger"></h:commandButton>
-                    </h:form>
+                    
         </div>
+                <div class="col-2">
+                    <h:form>
+                       <h:commandButton style="margin-top: 10px" action="grupo" value="Volver al Grupo" class="btn btn-success"></h:commandButton>
+                    </h:form>
+                    <br/>
+                    <h:form>
+                        <h:commandButton style="margin-top: 10px" action="#{grupoBean.doSalir()}" value="Eliminar Grupo" class="btn btn-danger"></h:commandButton>
+                    </h:form>
+                </div>       
+            </div>
+        </div>
+
 
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

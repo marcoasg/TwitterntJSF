@@ -14,6 +14,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import twitternt.dao.AmigosFacade;
 import twitternt.dao.GrupoFacade;
 import twitternt.dao.GrupoUsuariosFacade;
 import twitternt.dao.PostFacade;
@@ -43,6 +44,9 @@ public class GrupoBean implements Serializable {
     @EJB
     private GrupoUsuariosFacade grupoUsuariosFacade;
     
+    @EJB
+    private AmigosFacade amigosFacade;
+    
     @Inject
     private LoginBean loginBean;
     
@@ -52,6 +56,10 @@ public class GrupoBean implements Serializable {
     private Usuario usuario;
     
     private Usuario usuarioSeleccionado;
+    
+    private List<Usuario> usuarios;
+    
+    private List<Usuario> listaAmigos;
     
     private Integer grupoId;
     
@@ -68,6 +76,10 @@ public class GrupoBean implements Serializable {
     public void init(){
         usuario = usuarioFacade.findById(loginBean.getUserId());
         grupo = grupoFacade.findById(gruposBean.getGrupoId());
+        usuarios = grupoUsuariosFacade.findUsuarios(grupo);
+        usuarios.remove(usuario);
+        listaAmigos = amigosFacade.findByUser(loginBean.getUserId());
+        listaAmigos.removeAll(usuarios);
         
         if(grupo.getAdmin().equals(usuario)){
                 admin = true;
@@ -90,10 +102,11 @@ public class GrupoBean implements Serializable {
         usuarioFacade.edit(usuario);
         grupoFacade.edit(grupo);
         this.init();
-        return "null";
+        return null;
     }
     
     public String doSalir(){
+        init();
         if(admin){
             this.grupoFacade.remove(grupo);
         }else{
@@ -102,6 +115,29 @@ public class GrupoBean implements Serializable {
         }
         gruposBean.init();
         return "grupos";
+    }
+    
+    public String doEliminar(){
+        if(usuarioSeleccionado.equals(usuario)){
+            return doSalir();
+        }else{
+            GrupoUsuarios gu = this.grupoUsuariosFacade.findGrupo(usuarioSeleccionado, grupo);
+            grupoUsuariosFacade.remove(gu);
+            init();
+            return null;
+        }
+    }
+    
+    public String doInvitar(){
+        GrupoUsuarios g = new GrupoUsuarios(grupo.getId(), usuarioSeleccionado.getId());
+        g.setGrupo1(grupo);
+        g.setUsuario1(usuarioSeleccionado);
+        short solicitudAceptada = 0;
+        g.setSolicitudAceptada(solicitudAceptada);
+        grupoUsuariosFacade.create(g);
+        
+        init();
+        return null;
     }
     
     public Usuario getUsuario() {
@@ -133,5 +169,38 @@ public class GrupoBean implements Serializable {
 
     public void setGrupoId(int grupoId) {
         this.grupoId = grupoId;
+    }
+    
+    
+    public Usuario getUsuarioSeleccionado() {
+        return usuarioSeleccionado;
+    }
+
+    public void setUsuarioSeleccionado(Usuario usuarioSeleccionado) {
+        this.usuarioSeleccionado = usuarioSeleccionado;
+    }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
+    
+    public List<Usuario> getListaAmigos() {
+        return listaAmigos;
+    }
+
+    public void setListaAmigos(List<Usuario> listaAmigos) {
+        this.listaAmigos = listaAmigos;
+    }
+    
+      public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 }

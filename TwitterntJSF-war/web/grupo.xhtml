@@ -55,6 +55,7 @@
                     </h:form>
                 </div>
                 <div class="col-6">
+                    <div class="container3">
                     <h:form>
               <div class="row">
               <div class="col-sm-10">
@@ -70,11 +71,12 @@
               <h:inputText class="form-control" value="#{grupoBean.post.imagen}" size="58" t:placeholder="Url de la imagen" />
                  
           </h:form>
+                    </div>
                     <div>
                     <h:dataTable value="#{grupoBean.grupo.postList}" var="post">
                         <h:column>
 
-                            <div class="container">
+                            <div class="container4">
 
                                 <img src="#{post.usuario.imagenFormateada}" style="width:80px; height:80px;" alt="avatar" class="avatar"/>
 
@@ -106,7 +108,7 @@
                 <!--Admin-->
                 <div class="col-3" align="center">
                     <h:form>
-                    <h:commandButton  action="#{grupoBean.doPost()}" value="Administrar Grupo" class="btn btn-outline-success" style="height: 80px;"/>
+                    <h:commandButton rendered="#{grupoBean.admin}" action="administrarGrupo" value="Administrar Grupo" class="btn btn-outline-success" style="height: 80px;"/>
                     </h:form>
                 </div>
               

@@ -45,9 +45,9 @@
 
 
 
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-4">
+        <div class="container-fluid" id ="div1">
+            <div class="row" id="div2">
+                <div class="col-4" id="div3">
 
                     <br/>                  
                     <div class="twitter-card">
@@ -86,80 +86,77 @@
 
 
                     <br/><br/>
-                    <h:form id="form2" style="margin-left: 5em;" rendered="#{loginBean.perfilVisible}">
-                        <h6>Nombre de usuario</h6>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-edit"></i></span>
+                    <h:form id="form2" style="margin-left: 5em; opacity: #{loginBean.perfilVisible}">
+                            <h6>Nombre de usuario</h6>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-edit"></i></span>
+                                </div>
+                                <h:outputText id="user" value="#{loginBean.user}" class="form-control"/>
                             </div>
-                            <h:outputText id="user" value="#{loginBean.user}" class="form-control"/>
-                        </div>
-                        <h6>Contraseña</h6>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon11"><i class="fas fa-user-lock"></i></span>
+                            <h6>Contraseña</h6>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon11"><i class="fas fa-user-lock"></i></span>
+                                </div>
+                                <h:inputSecret disabled="#{loginBean.perfilVisible == 0}" id="pass" value="#{loginBean.pass}" class="form-control" validatorMessage="Contraseña no v&aacute;lida">
+                                </h:inputSecret>
                             </div>
-                            <h:inputSecret  id="pass" value="#{loginBean.pass}" class="form-control" validatorMessage="Contraseña no v&aacute;lida">
-                                <f:validateLength minimum="1" maximum="30"></f:validateLength>
-                            </h:inputSecret>
-                        </div>
-                        <h:message for="pass" style="color: red"/>
-                        <h6>Repetir Contraseña</h6>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon111"><i class="fas fa-user-lock" ></i></span>
-                            </div>
-                            <h:inputSecret id="passRep" value="#{loginBean.passRep}" class="form-control" validatorMessage="Contraseña no v&aacute;lida">
-                                <f:validateLength minimum="1" maximum="30"></f:validateLength>
-                            </h:inputSecret>
-                        </div>
-                        <h:message for="passRep" style="color: red"/>
 
-                        <h6>Nombre</h6>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1111"><i class="fas fa-clipboard-list"></i></span>
+                            <h6>Repetir Contraseña</h6>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon111"><i class="fas fa-user-lock" ></i></span>
+                                </div>
+                                <h:inputSecret disabled="#{loginBean.perfilVisible == 0}" id="passRep" value="#{loginBean.passRep}" class="form-control" validatorMessage="Contraseña no v&aacute;lida">
+                                </h:inputSecret>
                             </div>
-                            <h:inputText id="nombre" value="#{loginBean.nombre}" class="form-control" validatorMessage="Nombre no v&aacute;lido">
-                                <f:validateLength minimum="1" maximum="45"></f:validateLength>
-                            </h:inputText>
-                        </div>
-                        <h:message for="nombre" style="color: red"/>
-                        <h6>Apellidos</h6>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1111"><i class="fas fa-clipboard-list"></i></span>
-                            </div>
-                            <h:inputText id="apellidos" value="#{loginBean.apellidos}" class="form-control" validatorMessage="Apellidos no v&aacute;lidos">
-                                <f:validateLength minimum="1" maximum="60"></f:validateLength>
-                            </h:inputText>
-                        </div>
-                        <h:message for="apellidos" style="color: red"/>
-                        <h6>E-mail</h6>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon111111"><i class="fas fa-at"></i></span>
-                            </div>
-                            <h:inputText id="email" value="#{loginBean.email}" class="form-control" validatorMessage="E-mail no v&aacute;lido">
-                                <f:validateLength minimum="1" maximum="60"></f:validateLength>
-                            </h:inputText> 
-                        </div>
-                        <h:message for="email" style="color: red"/>
 
-                        <h6>Foto de perfil</h6>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon111111"><i class="fab fa-google-drive"></i></span>
+                            <h6>Nombre</h6>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1111"><i class="fas fa-clipboard-list"></i></span>
+                                </div>
+                                <h:inputText disabled="#{loginBean.perfilVisible == 0}" id="nombre" value="#{loginBean.nombre}" class="form-control" validatorMessage="Nombre no v&aacute;lido">
+                                    <f:validateLength minimum="1" maximum="45"></f:validateLength>
+                                </h:inputText>
                             </div>
-                            <h:inputText id="imagen" value="#{loginBean.imagen}" class="form-control"/> 
-                        </div>
+                            <h:message for="nombre" style="color: red"/>
+                            <h6>Apellidos</h6>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1111"><i class="fas fa-clipboard-list"></i></span>
+                                </div>
+                                <h:inputText disabled="#{loginBean.perfilVisible == 0}" id="apellidos" value="#{loginBean.apellidos}" class="form-control" validatorMessage="Apellidos no v&aacute;lidos">
+                                    <f:validateLength minimum="1" maximum="60"></f:validateLength>
+                                </h:inputText>
+                            </div>
+                            <h:message for="apellidos" style="color: red"/>
+                            <h6>E-mail</h6>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon111111"><i class="fas fa-at"></i></span>
+                                </div>
+                                <h:inputText disabled="#{loginBean.perfilVisible == 0}" id="email" value="#{loginBean.email}" class="form-control" validatorMessage="E-mail no v&aacute;lido">
+                                    <f:validateLength minimum="1" maximum="60"></f:validateLength>
+                                </h:inputText> 
+                            </div>
+                            <h:message for="email" style="color: red"/>
 
-                        <h:commandButton action="#{loginBean.doEditar()}"
-                                         value="Editar"
-                                         class="btn btn-success"
-                                         style="margin-bottom: 10px">
-                        </h:commandButton>
-                    </h:form>
+                            <h6>Foto de perfil</h6>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon111111"><i class="fab fa-google-drive"></i></span>
+                                </div>
+                                <h:inputText disabled="#{loginBean.perfilVisible == 0}" id="imagen" value="#{loginBean.imagen}" class="form-control"/> 
+                            </div>
+
+                            <h:commandButton disabled="#{loginBean.perfilVisible == 0}" action="#{loginBean.doEditar()}"
+                                             value="Editar"
+                                             class="btn btn-success"
+                                             style="margin-bottom: 10px">
+                            </h:commandButton>
+                        </h:form>
 
                 </div>
                 <div class="col-4">

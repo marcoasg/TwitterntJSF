@@ -47,7 +47,7 @@ public class LoginBean implements Serializable {
     private List<Post> listaPostPropios;
     private Usuario usuarioSeleccionado;
     
-    private boolean perfilVisible;
+    private int perfilVisible;
 
     /**
      * Creates a new instance of LoginBean
@@ -89,7 +89,7 @@ public class LoginBean implements Serializable {
     }
     
     public void mostrarOcultarPerfil(){
-        perfilVisible = !perfilVisible;
+        perfilVisible = (perfilVisible + 1) % 2;
     }
 
     public UsuarioFacade getUsuarioFacade() {
@@ -164,11 +164,11 @@ public class LoginBean implements Serializable {
         this.passRep = passRep;
     }
 
-    public boolean isPerfilVisible() {
+    public int getPerfilVisible() {
         return perfilVisible;
     }
 
-    public void setPerfilVisible(boolean perfilVisible) {
+    public void setPerfilVisible(int perfilVisible) {
         this.perfilVisible = perfilVisible;
     }
     

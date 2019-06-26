@@ -107,12 +107,14 @@ public class GrupoBean implements Serializable {
     
     public String doSalir(){
         init();
+        
+        GrupoUsuarios gu = this.grupoUsuariosFacade.findGrupo(usuario, grupo);
+        grupoUsuariosFacade.remove(gu);
+        
         if(admin){
             this.grupoFacade.remove(grupo);
-        }else{
-            GrupoUsuarios gu = this.grupoUsuariosFacade.findGrupo(usuario, grupo);
-            grupoUsuariosFacade.remove(gu);
         }
+            
         gruposBean.init();
         return "grupos";
     }

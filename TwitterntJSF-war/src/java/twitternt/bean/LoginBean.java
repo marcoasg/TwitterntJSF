@@ -46,6 +46,8 @@ public class LoginBean implements Serializable {
     private String email;
     private List<Post> listaPostPropios;
     private Usuario usuarioSeleccionado;
+    
+    private boolean perfilVisible;
 
     /**
      * Creates a new instance of LoginBean
@@ -84,6 +86,10 @@ public class LoginBean implements Serializable {
         HttpSession httpSession = (HttpSession) session;
         httpSession.invalidate();
         return "login.jsf";
+    }
+    
+    public void mostrarOcultarPerfil(){
+        perfilVisible = !perfilVisible;
     }
 
     public UsuarioFacade getUsuarioFacade() {
@@ -157,6 +163,15 @@ public class LoginBean implements Serializable {
     public void setPassRep(String passRep) {
         this.passRep = passRep;
     }
+
+    public boolean isPerfilVisible() {
+        return perfilVisible;
+    }
+
+    public void setPerfilVisible(boolean perfilVisible) {
+        this.perfilVisible = perfilVisible;
+    }
+    
 
     public Usuario getUsuarioSeleccionado() {
         return usuarioSeleccionado;

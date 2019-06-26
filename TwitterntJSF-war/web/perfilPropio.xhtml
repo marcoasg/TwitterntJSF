@@ -48,40 +48,45 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-4">
-                    
-  <br/>                  
-<div class="twitter-card">
-  <div class="row-top">
-    <div class="user-wrapper">
-       <img class="user-image"  alt="Imagen de perfil" src="#{loginBean.imagenFormateada}" rendered="#{loginBean.imagen != null}"></img>
-       <div class="profile-user">
-           <span class="user">#{loginBean.nombre} &nbsp; #{loginBean.apellidos}</span>
-           <span class="username">@#{loginBean.user}</span>
-       </div>
-    </div>
 
-  </div>
-  
-  <div class="row-middle">
+                    <br/>                  
+                    <div class="twitter-card">
+                        <div class="row-top">
+                            <div class="user-wrapper">
+                                <img class="user-image"  alt="Imagen de perfil" src="#{loginBean.imagenFormateada}" rendered="#{loginBean.imagen != null}"></img>
+                                <div class="profile-user">
+                                    <span class="user">#{loginBean.nombre} &nbsp; #{loginBean.apellidos}</span>
+                                    <span class="username">@#{loginBean.user}</span>
+                                </div>
+                            </div>
+                            <h:form>
+                                <h:commandButton class="follow" value="Editar perfil">
+                                    <f:ajax listener="#{loginBean.mostrarOcultarPerfil()}" render="form2"/>
+                                </h:commandButton>
+                            </h:form>
 
-  </div>
-  <div class="row-bottom">
-    <span class="followers-count">
-      Posts
-      <span class="count-meta">#{loginBean.listaPostPropios.size()}</span>
-    </span>
-    <span class="following-count">
-      Amigos
-      <span class="count-meta">#{loginBean.usuario.amigosList.size()}</span>
-      
-    </span>
+                        </div>
 
-  </div>
-</div>         
-                    
-                   
+                        <div class="row-middle">
+
+                        </div>
+                        <div class="row-bottom">
+                            <span class="followers-count">
+                                Posts
+                                <span class="count-meta">#{loginBean.listaPostPropios.size()}</span>
+                            </span>
+                            <span class="following-count">
+                                Amigos
+                                <span class="count-meta">#{loginBean.usuario.amigosList.size()}</span>
+
+                            </span>
+
+                        </div>
+                    </div>         
+
+
                     <br/><br/>
-                    <h:form style="margin-left: 5em;">
+                    <h:form id="form2" style="margin-left: 5em;" rendered="#{loginBean.perfilVisible}">
                         <h6>Nombre de usuario</h6>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
@@ -164,7 +169,7 @@
                                     <blockquote class="tweet">#{post.texto}</blockquote>
 
                                     <h:panelGroup rendered="#{post.tieneImagen()}">
-                                    <img src="#{post.getImagenFormateada()}" style="max-width:500px; max-height:400px;" />
+                                        <img src="#{post.getImagenFormateada()}" style="max-width:500px; max-height:400px;" />
                                     </h:panelGroup>
 
 

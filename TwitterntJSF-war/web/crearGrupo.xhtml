@@ -46,23 +46,24 @@
         <!--Página de crear Grupo-->
         <div class="container-fluid">
         <div class="row">
-            <h:form>
-                <div class="col-4">
-                    <h1>Nombre del Grupo</h1>
-                     <h:inputText id="nombre" value="#{gruposBean.nombre}" class="form-control" />
-                </div>
-                <div class="col-4">
-                    <h1>Descripci&oacute;n del Grupo</h1>
-                    <h:inputText id="descripcion" value="#{gruposBean.descripcion}" class="form-control" />
-                </div>
-
-                 <div class="col-3">
-
-                     <h:commandButton action="#{gruposBean.doCrearGrupo()}" 
-                                             value="Crear Gupo" class="btn btn-success">
-                      </h:commandButton>
-                 </div>
-             </h:form>
+                   
+                        <div class="col-4">
+                            <h:form>
+                            <h1>Nombre</h1>
+                            <h:inputText id="nombre" value="#{gruposBean.nombre}" class="form-control" />
+                            <h1>Descripci&oacute;n</h1>
+                            <h:inputTextarea class="form-control"  rows="4" style="resize: none"  value="#{gruposBean.descripcion}"/>
+                            <br/>
+                            <h:commandButton action="#{gruposBean.doCrearGrupo()}" 
+                                                     value="Crear Gupo" class="btn btn-success">
+                            </h:commandButton>
+                            </h:form>
+                        </div>
+                        <div class="col-3"></div>
+                        <div class="col-3">
+                           
+                        </div>
+                    
        </div>
        </div>              
                 

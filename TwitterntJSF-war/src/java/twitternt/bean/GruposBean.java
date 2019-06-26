@@ -25,7 +25,7 @@ import twitternt.entity.Usuario;
  * @author adry1
  */
 @Named(value = "gruposBean")
-@RequestScoped
+@SessionScoped
 public class GruposBean implements Serializable {
     
     @EJB
@@ -42,9 +42,9 @@ public class GruposBean implements Serializable {
     
     private Usuario usuario;
     
-    private List<Grupo> gruposAdmin;
-    
     private List<GrupoUsuarios> grupos;
+
+    private List<GrupoUsuarios> solicitudes;
     
     private Grupo grupoAdminSeleccionado;
     
@@ -54,7 +54,17 @@ public class GruposBean implements Serializable {
     
     private String descripcion;
     
-    private Short solicitudAceptada;
+    private short solicitudAceptada;
+    
+    private int grupoId;
+
+    public int getGrupoId() {
+        return grupoId;
+    }
+
+    public void setGrupoId(int grupoId) {
+        this.grupoId = grupoId;
+    }
  
 
     public GruposBean() {
@@ -63,8 +73,13 @@ public class GruposBean implements Serializable {
      @PostConstruct
     public void init(){
             usuario = usuarioFacade.findById(loginBean.getUserId());
-            grupos = grupoUsuariosFacade.findByUser(usuario);
-            gruposAdmin = grupoFacade.findByAdmin(usuario);
+            grupos = grupoUsuariosFacade.findGrupoByUser(usuario);
+            solicitudes = grupoUsuariosFacade.findSolicitudesByUser(usuario);
+       
+    }
+    
+    public String doSeleccionarGrupo(){
+        return "grupo";
     }
     
     public String doEliminar(){
@@ -107,13 +122,19 @@ public class GruposBean implements Serializable {
             return "crearGrupo";
         }
     }
-    
-    public List<Grupo> getGruposAdmin() {
-        return gruposAdmin;
+      
+    public String doAceptarSolicitud(){
+        short aceptada = 1;
+        grupoSeleccionado.setSolicitudAceptada(aceptada);
+        grupoUsuariosFacade.edit(grupoSeleccionado);
+        init();
+        return null;
+                
     }
-
-    public void setGruposAdmin(List<Grupo> gruposAdmin) {
-        this.gruposAdmin = gruposAdmin;
+   
+    
+    public String doRechazarSolicitud(){
+        return doSalir();
     }
 
     public List<GrupoUsuarios> getGrupos() {
@@ -163,5 +184,14 @@ public class GruposBean implements Serializable {
     public void setSolicitudAceptada(Short solicitudAceptada) {
         this.solicitudAceptada = solicitudAceptada;
     }
+    
+     public List<GrupoUsuarios> getSolicitudes() {
+        return solicitudes;
+    }
+
+    public void setSolicitudes(List<GrupoUsuarios> solicitudes) {
+        this.solicitudes = solicitudes;
+    }
+    
  
 }

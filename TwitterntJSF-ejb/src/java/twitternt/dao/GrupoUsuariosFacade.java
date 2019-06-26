@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import twitternt.entity.Grupo;
 import twitternt.entity.GrupoUsuarios;
 import twitternt.entity.Usuario;
 
@@ -36,8 +37,16 @@ public class GrupoUsuariosFacade extends AbstractFacade<GrupoUsuarios> {
         q.setParameter("id", id).executeUpdate();
     }
 
-    public List<GrupoUsuarios> findByUser(Usuario usuario) {
-       return (List<GrupoUsuarios>) this.em.createQuery("SELECT g FROM GrupoUsuarios g WHERE g.usuario1 = :u").setParameter("u", usuario).getResultList();
+    public List<GrupoUsuarios> findGrupoByUser(Usuario usuario) {
+       return (List<GrupoUsuarios>) this.em.createQuery("SELECT g FROM GrupoUsuarios g WHERE g.usuario1 = :u and g.solicitudAceptada = 1").setParameter("u", usuario).getResultList();
+    }
+    
+    public List<GrupoUsuarios> findSolicitudesByUser(Usuario usuario){
+        return (List<GrupoUsuarios>) this.em.createQuery("SELECT g FROM GrupoUsuarios g WHERE g.usuario1 = :u and g.solicitudAceptada = 0").setParameter("u", usuario).getResultList();
+    }
+    
+    public GrupoUsuarios findGrupo(Usuario usuario, Grupo grupo){
+        return (GrupoUsuarios) this.em.createQuery("SELECT  g FROM GrupoUsuarios g WHERE g.usuario1 = :u and g.grupo1 = :g").setParameter("u", usuario).setParameter("g", grupo).getSingleResult();
     }
     
 }

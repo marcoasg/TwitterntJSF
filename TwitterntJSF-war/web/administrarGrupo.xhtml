@@ -3,14 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-
     <h:head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous"/>
         <link rel="stylesheet" href="resources/css/estiloBase.css"></link>
-        <title>Grupos</title>
+        <title>Administrar Grupo</title>
     </h:head>
-    <h:body>
+       <h:body>
         <!--Menú de navegación-->
         <h:form>
             <div class="card text-center" style="background-color: #5cb85c">
@@ -42,64 +41,69 @@
         </h:form>
         <br/>
 
-        <!--Página de grupos-->
+        <!--Página de Administrar grupo-->
         <div class="container-fluid">
             <div class="row">
                 <div class="col-6">
-                    <h1>Mis Grupos</h1>
-                    <h:dataTable value="#{gruposBean.grupos}" var="grupo">
+                    <h1>Usuarios del Grupo</h1>
+                    <h:dataTable value="#{grupoBean.usuarios}" var="usuario">
                         <h:column>
-                            <h:form>
-                            <h:commandLink action="#{gruposBean.doSeleccionarGrupo()}" class="btn btn-link">
-                                <h3> #{grupo.getGrupo1().nombre} </h3>
-                                <f:setPropertyActionListener value="#{grupo.grupo1.id}"
-                                                                 target="#{gruposBean.grupoId}" />
+                           <h:form>
+                                <h:commandLink action="#{loginBean.doSeleccionarUsuario(usuario)}" class="btn btn-link">
+                                    #{usuario.nombre}&nbsp;#{usuario.apellidos}
+                                    <f:setPropertyActionListener value="#{usuario}"
+                                                                 target="#{perfilBean.usuario}" />
                                 </h:commandLink>
                             </h:form>
                         </h:column>
                         <h:column></h:column>
                         <h:column>
-                            #{grupo.getGrupo1().descripcion}
+                             <h:form>
+                                 <h:commandButton action="#{grupoBean.doEliminar()}" 
+                                    value="Expulsar" class="btn btn-danger"
+                                    style="margin-left: 15px">
+                                        <f:setPropertyActionListener value="#{usuario}"
+                                                                     target="#{grupoBean.usuarioSeleccionado}" />
+                                </h:commandButton>
+                            </h:form>
                         </h:column>
                     </h:dataTable>
                     <br/>
                     <h:form>
-                        <h:commandButton style="margin-top: 10px" action="crearGrupo" value="Nuevo Grupo" class="btn btn-success"></h:commandButton>
+                        <h:commandButton style="margin-top: 10px" action="grupo" value="Volver" class="btn btn-success"></h:commandButton>
                     </h:form>
                 </div>
                 <div class="col-6">
-                    <h1>Solicitudes de grupos</h1>
-                    <h:dataTable value="#{gruposBean.solicitudes}" var="solicitud">
-                        <h:column>
-                            <h3> #{solicitud.getGrupo1().nombre} </h3>
-                        </h:column>
-                        <h:column></h:column>
-                        <h:column>
-                            #{solicitud.getGrupo1().descripcion}
-                        </h:column>
-                        <h:column>
-                             <h:form>
-                                <h:commandButton action="#{gruposBean.doAceptarSolicitud()}" 
-                                    value="Aceptar" class="btn btn-success"
-                                    accesskey="" style="margin-left: 15px">
-                                        <f:setPropertyActionListener value="#{solicitud}"
-                                            target="#{gruposBean.grupoSeleccionado}" />
-                                </h:commandButton>
-                            </h:form>
-                        </h:column>
+                    <h1>Lista de amigos</h1>
+                       <h:dataTable value="#{grupoBean.listaAmigos}" var="amigo">
                         <h:column>
                             <h:form>
-                                <h:commandButton action="#{gruposBean.doRechazarSolicitud()}" 
-                                    value="Rechazar" class="btn btn-danger"
-                                    accesskey="" style="margin-left: 15px">
-                                        <f:setPropertyActionListener value="#{solicitud}"
-                                            target="#{gruposBean.grupoSeleccionado}" />
+                                <h:commandLink action="#{loginBean.doSeleccionarUsuario(amigo)}" class="btn btn-link">
+                                    #{amigo.nombre}&nbsp;#{amigo.apellidos}
+                                    <f:setPropertyActionListener value="#{amigo}"
+                                                                 target="#{perfilBean.usuario}" />
+                                </h:commandLink>
+                            </h:form>
+                        </h:column>
+
+                        <h:column></h:column>
+
+                        <h:column>
+                            <h:form>
+                                <h:commandButton action="#{grupoBean.doInvitar()}" 
+                                                 value="Invitar"
+                                                 class="btn btn-success"
+                                                 style="margin-left: 15px">
+                                    <f:setPropertyActionListener value="#{amigo}"
+                                                                 target="#{grupoBean.usuarioSeleccionado}" />
                                 </h:commandButton>
                             </h:form>
                         </h:column>
-                    </h:dataTable>
-        </div>
-        </div>
+                       </h:dataTable>
+                    <br/>
+                    <h:form>
+                        <h:commandButton style="margin-top: 10px" action="#{grupoBean.doEliminar()}" value="Eliminar Grupo" class="btn btn-danger"></h:commandButton>
+                    </h:form>
         </div>
 
 

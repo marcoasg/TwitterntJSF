@@ -8,6 +8,7 @@ package twitternt.bean;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -15,9 +16,11 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import twitternt.dao.GrupoFacade;
 import twitternt.dao.GrupoUsuariosFacade;
+import twitternt.dao.PostFacade;
 import twitternt.dao.UsuarioFacade;
 import twitternt.entity.Grupo;
 import twitternt.entity.GrupoUsuarios;
+import twitternt.entity.Post;
 import twitternt.entity.Usuario;
 
 /**
@@ -30,9 +33,12 @@ public class GrupoBean implements Serializable {
     
     @EJB
     private UsuarioFacade usuarioFacade;
-        
+    
     @EJB
-    private GrupoFacade  grupoFacade;
+    private PostFacade postFacade;
+    
+    @EJB 
+    private GrupoFacade grupoFacade;
     
     @EJB
     private GrupoUsuariosFacade grupoUsuariosFacade;
@@ -40,54 +46,62 @@ public class GrupoBean implements Serializable {
     @Inject
     private LoginBean loginBean;
     
-    @Inject
+    @Inject 
     private GruposBean gruposBean;
     
     private Usuario usuario;
     
-    private Grupo grupoAdmin;
+    private Usuario usuarioSeleccionado;
     
-    private GrupoUsuarios grupo;
+    private Integer grupoId;
     
-    private String nombre;
+    private Grupo grupo;
     
-    private String descripcion;
-    
-    private boolean solicitudAceptada;
+    private Post post;
 
+    private boolean admin;
     
         public GrupoBean() {
     }
     
      @PostConstruct
     public void init(){
-            usuario = usuarioFacade.findById((Integer) loginBean.getUserId());
-            grupoAdmin = gruposBean.getGrupoAdminSeleccionado();
-            grupo = gruposBean.getGrupoSeleccionado();
+        usuario = usuarioFacade.findById(loginBean.getUserId());
+        grupo = grupoFacade.findById(gruposBean.getGrupoId());
+        
+        if(grupo.getAdmin().equals(usuario)){
+                admin = true;
+        }else{
+                admin = false;
+        }
+        post = new Post();
     }
     
-    public String doCrearGrupo(){
-        init();
-        if(!this.nombre.equals("") && !this.descripcion.equals("")){
-            
-            grupoAdmin = new Grupo();
-            grupoAdmin.setId(0);
-            grupoAdmin.setNombre(nombre);
-            grupoAdmin.setDescripcion(descripcion);
-            grupoAdmin.setAdmin(usuario);
-            grupoFacade.create(grupoAdmin);
-            
-            grupo = new GrupoUsuarios();
-            grupo.setGrupo1(grupoAdmin);
-            grupo.setUsuario1(usuario);
-            short aceptada = 1;
-            grupo.setSolicitudAceptada(aceptada);
-            grupoUsuariosFacade.create(grupo);
-            
-            return "grupos";
+    public String doPost(){
+
+        post.setFechaPublicacion(new Date());
+        post.setUsuario(usuario);
+        post.setVisibilidad(1);
+        post.setGrupo(grupo);
+        usuario.getPostList().add(post);
+        grupo.getPostList().add(post);
+        loginBean.getListaPostPropios().add(post);
+        postFacade.create(post);
+        usuarioFacade.edit(usuario);
+        grupoFacade.edit(grupo);
+        this.init();
+        return "null";
+    }
+    
+    public String doSalir(){
+        if(admin){
+            this.grupoFacade.remove(grupo);
         }else{
-            return "crearGrupo";
+            GrupoUsuarios gu = this.grupoUsuariosFacade.findGrupo(usuario, grupo);
+            grupoUsuariosFacade.remove(gu);
         }
+        gruposBean.init();
+        return "grupos";
     }
     
     public Usuario getUsuario() {
@@ -98,44 +112,26 @@ public class GrupoBean implements Serializable {
         this.usuario = usuario;
     }
 
-    public Grupo getGrupoAdmin() {
-        return grupoAdmin;
-    }
-
-    public void setGrupoAdmin(Grupo grupoAdmin) {
-        this.grupoAdmin = grupoAdmin;
-    }
-
-    public GrupoUsuarios getGrupo() {
+    public Grupo getGrupo() {
         return grupo;
     }
 
-    public void setGrupo(GrupoUsuarios grupo) {
+    public void setGrupo(Grupo grupo) {
         this.grupo = grupo;
     }
 
-    public String getNombre() {
-        return nombre;
+     public Post getPost() {
+        return post;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setPost(Post post) {
+        this.post = post;
+    }
+     public int getGrupoId() {
+        return grupoId;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public void setGrupoId(int grupoId) {
+        this.grupoId = grupoId;
     }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public boolean isSolicitudAceptada() {
-        return solicitudAceptada;
-    }
-
-    public void setSolicitudAceptada(boolean solicitudAceptada) {
-        this.solicitudAceptada = solicitudAceptada;
-    }
-   
 }

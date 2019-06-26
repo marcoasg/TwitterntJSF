@@ -1,12 +1,15 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:t="http://xmlns.jcp.org/jsf/passthrough"
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
-                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous"/>
         <link rel="stylesheet" href="resources/css/estiloBase.css"></link>
-        <title>Facelet Title</title>
+        <link rel="stylesheet" href="resources/css/estiloPost.css"></link>
+        <title>Grupo</title>
     </h:head>
     <h:body>
                   <!--Menú de navegación-->
@@ -18,7 +21,7 @@
                             <a class="nav-link" style="color: #5cb85c" href="index.jsf"><i class="fas fa-dove" style="font-size: 20px; color: white"></i></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" style="color: #5cb85c" href="index.jsf"><b>Inicio</b></a>
+                            <a class="nav-link" style="color: white" href="index.jsf">Inicio</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" style="color: white" href="perfilPropio.jsf">Perfil</a>
@@ -27,7 +30,7 @@
                             <a class="nav-link" style="color: white " href="amigos.jsf">Amigos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: white" href="grupos.jsf">Grupos</a>
+                            <a class="nav-link active" style="color: #5cb85c" href="grupos.jsf"><b>Grupos</b></a>
                         </li>
                         <li class="nav-item" style="position: absolute; right: 0em">
                             <h:commandLink action="#{loginBean.logout()}" class="nav-link" style="color: white">
@@ -39,8 +42,81 @@
             </div>
         </h:form>
         <br/>
-          
-        Hello from Facelets
+                            <!--Pagina de grupo-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-3">
+                    <h1>#{grupoBean.grupo.nombre}</h1>
+                    <br/>
+                    <h3>#{grupoBean.grupo.descripcion}</h3>
+                    <br/>
+                    <h:form>
+                    <h:commandButton  action="#{grupoBean.doSalir()}" value="Salir del Grupo" class="btn btn-danger" style="height: 80px;" />
+                    </h:form>
+                </div>
+                <div class="col-6">
+                    <h:form>
+              <div class="row">
+              <div class="col-sm-10">
+              <h:inputTextarea class="form-control"  rows="3" style="resize: none"  value="#{grupoBean.post.texto}" t:placeholder="comenta para el grupo..."/> 
+              </div>
+              <div class="col-sm-2">
+                  <h:commandButton  action="#{grupoBean.doPost()}" value="Publicar" class="btn btn-success" style="height: 80px;" />
+
+              </div>
+
+              </div>
+                            
+              <h:inputText class="form-control" value="#{grupoBean.post.imagen}" size="58" t:placeholder="Url de la imagen" />
+                 
+          </h:form>
+                    <div>
+                    <h:dataTable value="#{grupoBean.grupo.postList}" var="post">
+                        <h:column>
+
+                            <div class="container">
+
+                                <img src="#{post.usuario.imagenFormateada}" style="width:80px; height:80px;" alt="avatar" class="avatar"/>
+
+                                <time class="tweet-time">#{post.fechaPublicacion.date}/#{post.fechaPublicacion.month + 1}/#{post.fechaPublicacion.year + 1900} &nbsp; &nbsp; #{indexBean.horaminuto(post.fechaPublicacion.hours)}:#{indexBean.horaminuto(post.fechaPublicacion.minutes)}</time>
+
+                                <div class="push">
+
+                                    <div class="user">
+
+                                        <div class="user-string" ><h:form><h:commandLink action="#{loginBean.doSeleccionarUsuario(post.usuario)}"><span class="name">#{post.usuario.nombre}</span><span class="username">@#{post.usuario.nombreUsuario}</span></h:commandLink></h:form></div>
+                                    </div>
+
+                                    <blockquote class="tweet">#{post.texto}</blockquote>
+                                    
+                                    <h:panelGroup rendered="#{post.tieneImagen()}">
+                                    <img src="#{post.getImagenFormateada()}" style="max-width:500px; max-height:400px;" />
+                                    </h:panelGroup>
+
+                                    
+
+                                </div>
+
+                            </div>
+
+                        </h:column>            
+                    </h:dataTable>
+                   </div>
+                </div>
+                <!--Admin-->
+                <div class="col-3" align="center">
+                    <h:form>
+                    <h:commandButton  action="#{grupoBean.doPost()}" value="Administrar Grupo" class="btn btn-outline-success" style="height: 80px;"/>
+                    </h:form>
+                </div>
+              
+            </div>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </h:body>
 </html>
 

@@ -62,6 +62,29 @@ html {
   }
 }
 
+.container3 {
+  position: relative;
+  border: 2px solid hsla(0, 0%, 73%, 1);
+  padding: 10px 10px 10px;
+  width: 660px;
+  background-color: #5cb85c;
+  transition: all .4s;
+  &:hover {
+    border: 2px solid hsla(194, 85%, 56%, 1);
+  }
+}
+
+.container4 {
+  position: relative;
+  border: 2px solid hsla(0, 0%, 73%, 1);
+  padding: 10px 10px 10px 60px;
+  width: 660px;
+  background-color: white;
+  transition: all .4s;
+  &:hover {
+    border: 2px solid hsla(194, 85%, 56%, 1);
+  }
+}
 .publicar{
       float: right;
   position: relative;
